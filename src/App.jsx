@@ -1,239 +1,9 @@
-import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import {
-  Search,
-  Bell,
-  Shield,
-  Landmark,
-  Filter,
-  ChevronRight,
-  ArrowRight,
-  Globe,
-  Database,
-  Network,
-  Sparkles,
-  Lock,
-  Briefcase,
-  Users,
-  FileBarChart,
-  LineChart,
-  Wallet,
-  CheckCircle2,
-  Clock3,
-  Flag,
-  BadgeDollarSign,
-  LogOut,
-} from "lucide-react";
-
-const mockUsers = [
-  { username: "investor", password: "demo123", displayName: "Investor", role: "investor" },
-  { username: "brian", password: "admin123", displayName: "Brian Bills", role: "admin" },
-];
-
-const entities = [
-  {
-    id: 1,
-    name: "Atlantic Capital Holdings LLC",
-    state: "Florida",
-    age: 11,
-    status: "Admin Dissolution",
-    tier: "Tier I",
-    score: 92,
-    estimatedValue: "$38K–$55K",
-    price: "$42,500",
-    industry: "Consulting",
-    readiness: "High",
-  },
-  {
-    id: 2,
-    name: "Suncoast Property Ventures Inc.",
-    state: "Florida",
-    age: 8,
-    status: "Inactive",
-    tier: "Tier II",
-    score: 81,
-    estimatedValue: "$24K–$34K",
-    price: "$27,900",
-    industry: "Real Estate",
-    readiness: "High",
-  },
-  {
-    id: 3,
-    name: "Gulfstream Logistics Group LLC",
-    state: "Texas",
-    age: 7,
-    status: "Admin Dissolution",
-    tier: "Tier II",
-    score: 78,
-    estimatedValue: "$19K–$31K",
-    price: "$24,800",
-    industry: "Logistics",
-    readiness: "Moderate",
-  },
-  {
-    id: 4,
-    name: "Silverline Merchant Solutions Corp.",
-    state: "Wyoming",
-    age: 6,
-    status: "Inactive",
-    tier: "Tier III",
-    score: 70,
-    estimatedValue: "$14K–$22K",
-    price: "$16,900",
-    industry: "Payments",
-    readiness: "Emerging",
-  },
-  {
-    id: 5,
-    name: "Reliant Energy Advisors LLC",
-    state: "Nevada",
-    age: 13,
-    status: "Admin Dissolution",
-    tier: "Tier I",
-    score: 95,
-    estimatedValue: "$45K–$62K",
-    price: "$48,750",
-    industry: "Energy",
-    readiness: "High",
-  },
-  {
-    id: 6,
-    name: "Heritage Medical Supply Inc.",
-    state: "Florida",
-    age: 9,
-    status: "Inactive",
-    tier: "Tier II",
-    score: 84,
-    estimatedValue: "$26K–$39K",
-    price: "$29,400",
-    industry: "Healthcare",
-    readiness: "Moderate",
-  },
-];
-
-const services = [
-  {
-    icon: Shield,
-    title: "Asset Protection Structures",
-    description:
-      "Cook Islands trust guidance, entity layering, and ownership shielding strategies for premium clients.",
-  },
-  {
-    icon: Landmark,
-    title: "Corporate Credit Optimization",
-    description:
-      "Advisory services to improve fundability, trade lines, and lender readiness after acquisition.",
-  },
-  {
-    icon: Briefcase,
-    title: "Executive Acquisition Concierge",
-    description:
-      "White-glove sourcing, negotiation support, ownership transfer, and transaction handling.",
-  },
-  {
-    icon: Wallet,
-    title: "Investor Access & REIT Pathways",
-    description:
-      "Structured investor offerings, premium member programs, and adjacent wealth-building products.",
-  },
-];
-
-const signals = [
-  { label: "Age Weight", value: "+28" },
-  { label: "Status Score", value: "+24" },
-  { label: "Credit Tier Potential", value: "+26" },
-  { label: "Industry Stability", value: "+14" },
-  { label: "Acquisition Friction", value: "-6" },
-];
-
-const architecture = [
-  {
-    title: "Public Registry Ingestion",
-    icon: Globe,
-    body: "State filing records are discovered from public Secretary of State sources and normalized into a unified entity pipeline.",
-  },
-  {
-    title: "Data Warehouse & Entity Graph",
-    icon: Database,
-    body: "Business records, ownership metadata, filing histories, and scoring attributes are stored in a structured intelligence layer.",
-  },
-  {
-    title: "Enrichment & Credit APIs",
-    icon: Network,
-    body: "Eligible entities are pushed through enrichment connectors and score engines to classify fundability and opportunity class.",
-  },
-  {
-    title: "Ranking & Marketplace",
-    icon: Sparkles,
-    body: "The platform ranks opportunities by score, age, price band, and acquisition readiness, then surfaces them inside a premium portal.",
-  },
-];
-
-const investors = [
-  {
-    title: "Why It Wins",
-    bullets: [
-      "Transforms fragmented manual sourcing into a structured intelligence platform.",
-      "Combines discovery, qualification, ranking, and monetization inside one system.",
-      "Creates cross-sell opportunities beyond entity acquisition itself.",
-    ],
-  },
-  {
-    title: "Revenue Streams",
-    bullets: [
-      "Premium subscription access to ranked opportunity data.",
-      "Transaction and concierge fees on successful acquisitions.",
-      "High-margin adjacent services: structuring, protection, investor pathways.",
-    ],
-  },
-  {
-    title: "Expansion Path",
-    bullets: [
-      "Florida proof point → all no-income-tax states → national coverage.",
-      "Data moat improves with every crawl, enrichment cycle, and transaction outcome.",
-      "Investor deck, deal room, and partner channel support built into product motion.",
-    ],
-  },
-];
-
-function tierClass(tier) {
-  if (tier === "Tier I") {
-    return "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30";
-  }
-  if (tier === "Tier II") {
-    return "bg-amber-500/15 text-amber-300 border border-amber-500/30";
-  }
-  return "bg-slate-500/15 text-slate-300 border border-slate-500/30";
-}
-
-function readinessClass(readiness) {
-  if (readiness === "High") return "text-emerald-400";
-  if (readiness === "Moderate") return "text-amber-400";
-  return "text-slate-400";
-}
-
-function StatCard({ title, value, sub, icon: Icon }) {
-  return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-950/70 p-6 text-white shadow-xl">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm text-slate-400">{title}</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight">{value}</p>
-          <p className="mt-2 text-xs text-slate-500">{sub}</p>
-        </div>
-        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3">
-          <Icon className="h-5 w-5 text-indigo-300" />
-        </div>
-      </div>
-    </div>
-  );
-}
+import React, { useState } from "react";
 
 function BuildingMark({ size = "md" }) {
   const map = {
     xs: {
       wrap: "w-7 h-7",
-      stroke: "stroke-[1.8]",
       base: "w-7",
       frontW: "w-[10px]",
       frontH: "h-[14px]",
@@ -248,7 +18,6 @@ function BuildingMark({ size = "md" }) {
     },
     sm: {
       wrap: "w-8 h-8",
-      stroke: "stroke-[1.9]",
       base: "w-8",
       frontW: "w-[11px]",
       frontH: "h-[16px]",
@@ -263,7 +32,6 @@ function BuildingMark({ size = "md" }) {
     },
     md: {
       wrap: "w-10 h-10",
-      stroke: "stroke-[2]",
       base: "w-10",
       frontW: "w-[13px]",
       frontH: "h-[19px]",
@@ -310,7 +78,7 @@ function BuildingMark({ size = "md" }) {
   );
 }
 
-function BizRankerWordmark({ size = "md" }) {
+function LeagueWordmark({ size = "md" }) {
   const textSizes = {
     xs: "text-[1rem]",
     sm: "text-[1.28rem]",
@@ -321,769 +89,740 @@ function BizRankerWordmark({ size = "md" }) {
     <div className="flex items-center gap-2.5">
       <BuildingMark size={size} />
       <span className={`${textSizes[size]} font-semibold tracking-tight text-white`}>
-        BizRanker
+        Entrepreneur’s League
       </span>
     </div>
   );
 }
 
-function Hero({ onLogin, loginError }) {
-  const [username, setUsername] = useState("investor");
-  const [password, setPassword] = useState("demo123");
-
-  const submit = (e) => {
-    e.preventDefault();
-    onLogin(username, password);
+function StatCard({ value, label, accent = "emerald" }) {
+  const accentMap = {
+    emerald: "border-emerald-500/20 bg-emerald-500/5",
+    sky: "border-sky-500/20 bg-sky-500/5",
+    violet: "border-violet-500/20 bg-violet-500/5",
+    amber: "border-amber-500/20 bg-amber-500/5",
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden text-white">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('/assets/images/bizranker-usreliance-headquarters.jpg')",
-        }}
-      />
-      <div className="absolute inset-0 bg-slate-950/72" />
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-950/82 to-indigo-950/60" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.16),transparent_30%)]" />
+    <div className={`rounded-3xl border p-5 backdrop-blur-md ${accentMap[accent]}`}>
+      <div className="text-3xl font-semibold text-white">{value}</div>
+      <div className="mt-2 text-sm text-slate-300">{label}</div>
+    </div>
+  );
+}
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-6 py-8 lg:px-10">
-        <div className="flex items-center justify-between">
-          <div className="rounded-2xl border border-white/10 bg-black/30 px-5 py-3 backdrop-blur-md">
+function CompactStat({ value, label, accent = "emerald" }) {
+  const accentMap = {
+    emerald: "border-emerald-500/20 bg-emerald-500/5",
+    sky: "border-sky-500/20 bg-sky-500/5",
+    violet: "border-violet-500/20 bg-violet-500/5",
+    amber: "border-amber-500/20 bg-amber-500/5",
+  };
+
+  return (
+    <div className={`rounded-2xl border p-4 ${accentMap[accent]}`}>
+      <div className="text-2xl font-semibold tracking-tight text-white">{value}</div>
+      <div className="mt-1 text-xs text-slate-300">{label}</div>
+    </div>
+  );
+}
+
+function ProofCard({ title, value, detail, accent = "emerald" }) {
+  const accentMap = {
+    emerald: "from-emerald-500/12 to-emerald-400/5 border-emerald-500/20",
+    sky: "from-sky-500/12 to-sky-400/5 border-sky-500/20",
+    violet: "from-violet-500/12 to-violet-400/5 border-violet-500/20",
+    amber: "from-amber-500/12 to-amber-400/5 border-amber-500/20",
+  };
+
+  return (
+    <div className={`rounded-3xl border bg-gradient-to-br ${accentMap[accent]} p-6`}>
+      <div className="text-xs uppercase tracking-[0.24em] text-slate-400">{title}</div>
+      <div className="mt-3 text-4xl font-semibold tracking-tight text-white">{value}</div>
+      <div className="mt-2 text-sm leading-6 text-slate-300">{detail}</div>
+    </div>
+  );
+}
+
+function StoryCard({ name, role, result, body }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div className="text-lg font-semibold text-white">{name}</div>
+          <div className="mt-1 text-sm text-slate-400">{role}</div>
+        </div>
+        <div className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
+          {result}
+        </div>
+      </div>
+      <p className="mt-4 text-sm leading-7 text-slate-300">{body}</p>
+    </div>
+  );
+}
+
+function FeatureCard({ eyebrow, title, body }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
+        {eyebrow}
+      </p>
+      <h3 className="mt-4 text-2xl font-semibold text-white">{title}</h3>
+      <p className="mt-3 text-sm leading-7 text-slate-300">{body}</p>
+    </div>
+  );
+}
+
+function PathCard({ title, body }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+      <p className="font-semibold text-white">{title}</p>
+      <p className="mt-2 text-sm text-slate-300">{body}</p>
+    </div>
+  );
+}
+
+function TierCard({
+  tier,
+  price,
+  cadence,
+  subtitle,
+  features,
+  cta,
+  accent = "emerald",
+  featured = false,
+}) {
+  const accentMap = {
+    emerald: {
+      ring: "border-emerald-500/30",
+      badge: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
+      button: "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
+      dot: "bg-emerald-400",
+    },
+    sky: {
+      ring: "border-sky-500/30",
+      badge: "border-sky-500/30 bg-sky-500/10 text-sky-300",
+      button: "bg-sky-500 text-slate-950 hover:bg-sky-400",
+      dot: "bg-sky-400",
+    },
+    violet: {
+      ring: "border-violet-500/30",
+      badge: "border-violet-500/30 bg-violet-500/10 text-violet-300",
+      button: "bg-violet-500 text-white hover:bg-violet-400",
+      dot: "bg-violet-400",
+    },
+  };
+
+  const a = accentMap[accent];
+
+  return (
+    <div
+      className={`flex h-full flex-col rounded-3xl border bg-slate-950/70 p-6 shadow-xl ${
+        featured ? `${a.ring} ring-1 ring-white/10` : "border-white/10"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div className={`inline-flex rounded-full border px-3 py-1 text-xs font-medium ${a.badge}`}>
+            {tier}
+          </div>
+          <div className="mt-4 text-4xl font-semibold tracking-tight text-white">
+            {price}
+            <span className="ml-1 text-xl text-slate-300">/{cadence}</span>
+          </div>
+          <p className="mt-3 text-sm leading-6 text-slate-300">{subtitle}</p>
+        </div>
+
+        {featured && (
+          <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
+            Most Direct Path
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6 space-y-3 pb-8">
+        {features.map((feature) => (
+          <div key={feature} className="flex items-start gap-3">
+            <div className={`mt-2 h-2.5 w-2.5 rounded-full ${a.dot}`} />
+            <p className="text-sm leading-6 text-slate-200">{feature}</p>
+          </div>
+        ))}
+      </div>
+
+      <button className={`mt-auto w-full rounded-xl px-5 py-3 text-sm font-semibold transition ${a.button}`}>
+        {cta}
+      </button>
+    </div>
+  );
+}
+
+function Chevron({ open }) {
+  return (
+    <span
+      className={`inline-block text-slate-300 transition-transform duration-200 ${
+        open ? "rotate-90" : ""
+      }`}
+    >
+      ▶
+    </span>
+  );
+}
+
+function ExpandableSection({ title, subtitle, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/5">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left"
+      >
+        <div>
+          <div className="text-sm font-semibold text-white">{title}</div>
+          {subtitle ? <div className="mt-1 text-xs text-slate-400">{subtitle}</div> : null}
+        </div>
+        <Chevron open={open} />
+      </button>
+
+      {open ? <div className="border-t border-white/10 px-4 py-4">{children}</div> : null}
+    </div>
+  );
+}
+
+function DesktopLayout() {
+  return (
+    <div className="hidden lg:block">
+      <header className="border-b border-white/10 bg-slate-950/85 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-3 backdrop-blur-md">
             <div className="flex items-center gap-4">
-              <BizRankerWordmark size="sm" />
+              <LeagueWordmark size="sm" />
               <div className="hidden h-8 w-px bg-white/10 sm:block" />
               <div className="hidden sm:block">
                 <div className="text-[11px] uppercase tracking-[0.32em] text-slate-300">
-                  Investor Prototype
+                  Corey Presentation
+                </div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.28em] text-emerald-300">
+                  Private Wealth Platform
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="hidden items-center gap-3 md:flex">
-            <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-slate-200 backdrop-blur">
-              Private Access
-            </span>
-            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300 backdrop-blur">
-              High-Trust Demo
+          <div className="flex items-center gap-3">
+            <button className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs text-slate-200 transition hover:bg-white/15">
+              Login
+            </button>
+            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
+              Ready to Deploy
             </span>
           </div>
         </div>
+      </header>
 
-        <div className="grid items-center gap-10 py-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <div className="mb-5 inline-flex rounded-full border border-sky-400/20 bg-sky-500/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-sky-200 backdrop-blur">
-              Corporate Intelligence • Acquisition Marketplace • Premium Services
+      <main>
+        <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1.04fr_0.96fr] lg:py-24">
+          <div className="max-w-3xl">
+            <div className="mb-5 inline-flex rounded-full border border-sky-400/20 bg-sky-500/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-sky-200">
+              Wealth Education • Opportunity Access • Premium Positioning
             </div>
 
-            <h1 className="text-5xl font-semibold tracking-tight text-white drop-shadow-lg md:text-6xl lg:text-7xl">
-              The premium portal for sourcing and ranking undervalued corporate entities.
+            <h1 className="text-5xl font-semibold tracking-tight text-white md:text-6xl lg:text-7xl">
+              Access real funding, business credit, and strategic deals — all in one place.
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-              BizRanker transforms public business registry data into a scored
-              acquisition marketplace by sourcing, enriching, ranking, and
-              packaging aged corporate opportunities for sophisticated buyers,
-              advisors, and investors.
+              This concept is built to help your visitors quickly understand what you offer,
+              why it matters, and what serious next step they should take.
             </p>
 
-            <div className="mt-8 rounded-[2rem] border border-white/10 bg-black/20 p-4 backdrop-blur-md max-w-2xl">
-              <img
-                src="/assets/images/cityscape.png"
-                alt="BizRanker cityscape"
-                className="w-full max-h-[210px] object-contain rounded-2xl"
-              />
+            <div className="mt-8 flex flex-wrap gap-4">
+              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">
+                Watch Overview
+              </button>
+              <button className="rounded-xl border border-sky-500/20 bg-sky-500/10 px-5 py-3 text-sm font-semibold text-sky-200 transition hover:bg-sky-500/15">
+                See How It Works
+              </button>
+              <button className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                Explore Membership Options
+              </button>
             </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-3xl border border-white/10 bg-black/25 p-5 backdrop-blur-md">
-                <div className="text-3xl font-semibold text-white">9</div>
-                <div className="mt-1 text-sm text-slate-300">
-                  No-income-tax states in rollout
-                </div>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-black/25 p-5 backdrop-blur-md">
-                <div className="text-3xl font-semibold text-white">4x</div>
-                <div className="mt-1 text-sm text-slate-300">
-                  Monetization lanes beyond entity sale
-                </div>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-black/25 p-5 backdrop-blur-md">
-                <div className="text-3xl font-semibold text-white">24/7</div>
-                <div className="mt-1 text-sm text-slate-300">
-                  Automated discovery and scoring flow
-                </div>
-              </div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              <StatCard value="3" label="Clear pathways" accent="emerald" />
+              <StatCard value="24/7" label="Lead capture" accent="sky" />
+              <StatCard value="High" label="Trust value" accent="violet" />
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.7 }}
-          >
-            <div className="rounded-[2rem] border border-white/10 bg-black/35 p-8 text-white shadow-2xl backdrop-blur-xl">
+          <div>
+            <div className="rounded-[2rem] border border-white/10 bg-black/30 p-8 shadow-2xl backdrop-blur-xl">
               <div className="mb-6">
                 <div className="mb-4 overflow-hidden">
-                  <BizRankerWordmark size="md" />
+                  <LeagueWordmark size="md" />
                 </div>
                 <h2 className="text-2xl font-semibold">Private Access Portal</h2>
                 <p className="mt-2 text-sm text-slate-300">
-                  Investor-grade preview of the BizRanker experience
+                  Premium front-end concept for Corey’s brand, offers, and opportunity flow
                 </p>
               </div>
 
-              <form onSubmit={submit} className="space-y-4">
-                <div>
-                  <label className="mb-2 block text-sm text-slate-200">
-                    Username
-                  </label>
-                  <input
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                    placeholder="investor"
-                  />
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                  <p className="text-sm font-semibold text-white">1. Learn the Playbook</p>
+                  <p className="mt-1 text-sm text-slate-300">
+                    Educational content, credibility, and a strong first impression.
+                  </p>
                 </div>
 
-                <div>
-                  <label className="mb-2 block text-sm text-slate-200">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                    placeholder="demo123"
-                  />
+                <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                  <p className="text-sm font-semibold text-white">2. See Where You Fit</p>
+                  <p className="mt-1 text-sm text-slate-300">
+                    Visitors can quickly tell whether they are here to learn, invest, or take action.
+                  </p>
                 </div>
 
-                {loginError && (
-                  <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
-                    {loginError}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className="h-12 w-full rounded-xl bg-indigo-600 text-white transition hover:bg-indigo-500"
-                >
-                  Access Dashboard
-                </button>
-              </form>
-
-              <div className="mt-4 grid grid-cols-2 gap-3 pt-2 text-xs text-slate-200">
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
-                  <div className="mb-1 flex items-center gap-2 font-medium text-white">
-                    <Lock className="h-4 w-4 text-indigo-300" />
-                    Private Deal Flow
-                  </div>
-                  Entity ranking, enrichment, and acquisition readiness.
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
-                  <div className="mb-1 flex items-center gap-2 font-medium text-white">
-                    <Shield className="h-4 w-4 text-indigo-300" />
-                    Trust Layer
-                  </div>
-                  Premium services, investor pathways, and protection strategies.
+                <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                  <p className="text-sm font-semibold text-white">3. Take the Next Serious Step</p>
+                  <p className="mt-1 text-sm text-slate-300">
+                    Strategy call, premium offer, or direct path into a real opportunity.
+                  </p>
                 </div>
               </div>
 
-              <div className="pt-4 text-center text-[11px] uppercase tracking-[0.24em] text-slate-400">
-                Powered by US Reliance
+              <div className="mt-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
+                <p className="text-sm font-semibold text-emerald-300">Positioning Statement</p>
+                <p className="mt-2 text-sm leading-7 text-slate-200">
+                  This is designed to feel like a premium front door for people who want more
+                  than inspiration.
+                </p>
               </div>
 
-              <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-3 text-xs text-slate-300">
-                Demo accounts: <span className="text-white">investor / demo123</span> and{" "}
-                <span className="text-white">brian / admin123</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-slate-300">
-          <span>Public Registry Data</span>
-          <span>•</span>
-          <span>Credit Signal Enrichment</span>
-          <span>•</span>
-          <span>Tiered Marketplace</span>
-          <span>•</span>
-          <span>Investor-Ready Story</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Dashboard({ user, onLogout }) {
-  const [query, setQuery] = useState("");
-  const [selectedId, setSelectedId] = useState(entities[0].id);
-  const [stateFilter, setStateFilter] = useState("All");
-
-  const selected = entities.find((e) => e.id === selectedId);
-
-  const filtered = useMemo(() => {
-    return entities.filter((e) => {
-      const matchQuery =
-        query.length === 0 ||
-        e.name.toLowerCase().includes(query.toLowerCase()) ||
-        e.industry.toLowerCase().includes(query.toLowerCase());
-
-      const matchState = stateFilter === "All" || e.state === stateFilter;
-      return matchQuery && matchState;
-    });
-  }, [query, stateFilter]);
-
-  return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <div className="border-b border-slate-800 bg-slate-950/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-10">
-          <div className="flex items-center gap-3 overflow-hidden">
-            <BizRankerWordmark size="xs" />
-            <div>
-              <div className="text-xs uppercase tracking-[0.28em] text-slate-500">
-                Acquisition Intelligence
+              <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-200">
+                <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-3">
+                  <div className="font-medium text-sky-300">Authority Layer</div>
+                  Clear positioning, premium presentation, and trust cues.
+                </div>
+                <div className="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-3">
+                  <div className="font-medium text-violet-300">Access Layer</div>
+                  Serious visitors move naturally toward the right next step.
+                </div>
               </div>
             </div>
           </div>
+        </section>
 
-          <div className="hidden max-w-md flex-1 items-center gap-3 md:flex">
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search entity, industry, or state signal"
-                className="h-11 w-full rounded-xl border border-slate-800 bg-slate-900 pl-9 pr-4 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button className="flex items-center rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-slate-200 hover:bg-slate-800 hover:text-white">
-              <Bell className="mr-2 h-4 w-4" />
-              Alerts
-            </button>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900 px-4 py-2 text-sm text-slate-200">
-              {user.displayName}
-            </div>
-            <button
-              onClick={onLogout}
-              className="flex items-center rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-slate-200 hover:bg-slate-800 hover:text-white"
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
-        <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h2 className="text-4xl font-semibold tracking-tight">
-              Corporate Opportunity Dashboard
+        <section className="mx-auto max-w-7xl px-6 py-4">
+          <div className="mb-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-400">
+              Proof, Not Fluff
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Serious visitors respond to outcomes, not canned testimonials.
             </h2>
-            <p className="mt-2 max-w-3xl text-slate-400">
-              Ranked acquisition opportunities sourced from public registry
-              data and enhanced through score-driven intelligence signals,
-              pricing bands, and services alignment.
-            </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button className="flex items-center rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-slate-200 hover:bg-slate-800 hover:text-white">
-              <Filter className="mr-2 h-4 w-4" />
-              Filter Set
-            </button>
-            <button className="rounded-xl bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500">
-              Export Deal Flow
-            </button>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <ProofCard
+              title="Funding Accessed"
+              value="$2.1M+"
+              detail="Illustrative placeholder for capital secured through positioning and business readiness."
+              accent="emerald"
+            />
+            <ProofCard
+              title="Entities Reviewed"
+              value="47"
+              detail="Example proof block showing how many opportunities were assessed or positioned for action."
+              accent="sky"
+            />
+            <ProofCard
+              title="Qualified Clients"
+              value="12"
+              detail="Serious buyers, investors, or operators who moved beyond curiosity."
+              accent="violet"
+            />
+            <ProofCard
+              title="Average Deal Size"
+              value="$28K"
+              detail="A clean way to signal economic seriousness without hype-heavy language."
+              accent="amber"
+            />
           </div>
-        </div>
+        </section>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <StatCard
-            title="Entities Indexed"
-            value="18,420"
-            sub="Across current rollout states"
-            icon={Database}
-          />
-          <StatCard
-            title="Tier I Opportunities"
-            value="1,142"
-            sub="Premium acquisition-ready profiles"
-            icon={BadgeDollarSign}
-          />
-          <StatCard
-            title="New This Week"
-            value="286"
-            sub="Recently surfaced candidates"
-            icon={Clock3}
-          />
-          <StatCard
-            title="Flagged for Review"
-            value="73"
-            sub="High potential / manual verification"
-            icon={Flag}
-          />
-        </div>
+        <section className="mx-auto max-w-7xl px-6 py-10">
+          <div className="grid gap-6 md:grid-cols-3">
+            <FeatureCard
+              eyebrow="Trust"
+              title="Look established from day one"
+              body="Strong visuals and confident messaging help visitors immediately feel they are in the right place."
+            />
+            <FeatureCard
+              eyebrow="Clarity"
+              title="Help people understand the opportunity"
+              body="The site can walk them through what Corey offers and what the next step should be."
+            />
+            <FeatureCard
+              eyebrow="Action"
+              title="Support premium offers and serious leads"
+              body="From consultations to courses to business opportunities, this layout gives each offer a credible home."
+            />
+          </div>
+        </section>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-[1.14fr_1.36fr]">
-          <div className="rounded-3xl border border-slate-800 bg-slate-950/70 p-6 text-white shadow-xl">
-            <div className="mb-6 flex flex-row items-center justify-between gap-4">
+        <section className="mx-auto max-w-7xl px-6 py-10">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8">
+            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
-                <h3 className="text-2xl font-semibold">
-                  Ranked Opportunity Listings
-                </h3>
-                <p className="mt-1 text-slate-400">
-                  Sort by tier, age, price, and acquisition readiness.
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
+                  Suggested Site Structure
                 </p>
+                <h3 className="mt-3 text-3xl font-semibold tracking-tight">
+                  One brand. Multiple ways to engage.
+                </h3>
+
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <PathCard title="Education Path" body="Videos, training, proof, and simple entry points." />
+                  <PathCard title="Consulting Path" body="A direct route for people ready to book time." />
+                  <PathCard title="Investor Path" body="A polished presentation for serious people." />
+                  <PathCard title="Premium Offer Path" body="High-value services and elite backend opportunities." />
+                </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                {["All", "Florida", "Texas", "Nevada", "Wyoming"].map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => setStateFilter(s)}
-                    className={`rounded-xl border px-3 py-2 text-sm ${
-                      stateFilter === s
-                        ? "border-indigo-500/40 bg-indigo-600 text-white hover:bg-indigo-500"
-                        : "border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-white"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
+              <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-6">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">
+                  Visitor Journey
+                </p>
+
+                <div className="mt-4 space-y-3">
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-sm text-slate-200">
+                    Arrives on the site
+                  </div>
+                  <div className="rounded-xl border border-sky-500/20 bg-sky-500/5 p-3 text-sm text-slate-200">
+                    Sees proof and authority
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-sm text-slate-200">
+                    Understands the options
+                  </div>
+                  <div className="rounded-xl border border-violet-500/20 bg-violet-500/5 p-3 text-sm text-slate-200">
+                    Books, opts in, or applies
+                  </div>
+                  <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-3 text-sm font-semibold text-emerald-300">
+                    Serious lead captured
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div className="mb-4 md:hidden">
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search entity or industry"
-                className="h-11 w-full rounded-xl border border-slate-800 bg-slate-900 px-4 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              />
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse table-auto">
-                <thead>
-                  <tr className="border-b border-slate-800">
-                    <th className="px-3 py-3 text-left text-sm font-medium text-slate-400 min-w-[230px]">
-                      Entity
-                    </th>
-                    <th className="px-3 py-3 text-left text-sm font-medium text-slate-400 w-[100px] whitespace-nowrap">
-                      State
-                    </th>
-                    <th className="px-3 py-3 text-left text-sm font-medium text-slate-400 w-[80px] whitespace-nowrap">
-                      Age
-                    </th>
-                    <th className="px-3 py-3 text-left text-sm font-medium text-slate-400 w-[124px] whitespace-nowrap">
-                      Tier
-                    </th>
-                    <th className="px-3 py-3 text-left text-sm font-medium text-slate-400 w-[78px] whitespace-nowrap">
-                      Score
-                    </th>
-                    <th className="px-3 py-3 text-left text-sm font-medium text-slate-400 w-[106px] whitespace-nowrap">
-                      Price
-                    </th>
-                    <th className="px-3 py-3 text-left text-sm font-medium text-slate-400 w-[98px] whitespace-nowrap">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((e) => (
-                    <tr
-                      key={e.id}
-                      onClick={() => setSelectedId(e.id)}
-                      className={`cursor-pointer border-b border-slate-800 ${
-                        selectedId === e.id
-                          ? "bg-slate-900/80"
-                          : "hover:bg-slate-900/50"
-                      }`}
-                    >
-                      <td className="px-3 py-4 min-w-[230px]">
-                        <div className="font-medium text-white">{e.name}</div>
-                        <div className="text-xs text-slate-500">
-                          {e.industry} • {e.status}
-                        </div>
-                      </td>
-                      <td className="px-3 py-4 w-[100px] whitespace-nowrap text-slate-300">
-                        {e.state}
-                      </td>
-                      <td className="px-3 py-4 w-[80px] whitespace-nowrap text-slate-300">
-                        {e.age} yrs
-                      </td>
-                      <td className="px-3 py-4 w-[124px] whitespace-nowrap">
-                        <span
-                          className={`inline-block min-w-[80px] text-center rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap ${tierClass(
-                            e.tier
-                          )}`}
-                        >
-                          {e.tier}
-                        </span>
-                      </td>
-                      <td className="px-3 py-4 w-[78px] whitespace-nowrap text-slate-100">
-                        {e.score}
-                      </td>
-                      <td className="px-3 py-4 w-[106px] whitespace-nowrap text-slate-100">
-                        {e.price}
-                      </td>
-                      <td className="px-3 py-4 w-[98px] whitespace-nowrap">
-                        <button className="flex items-center rounded-xl px-3 py-2 text-indigo-300 hover:bg-indigo-500/10 hover:text-indigo-200">
-                          View <ChevronRight className="ml-1 h-4 w-4" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
             </div>
           </div>
+        </section>
 
-          <div className="min-w-0 rounded-3xl border border-slate-800 bg-slate-950/70 p-6 text-white shadow-xl">
-            <h3 className="text-2xl font-semibold">Entity Detail</h3>
-            <p className="mt-1 text-slate-400">
-              Investor-facing snapshot of value, signals, and next-step services.
+        <section className="mx-auto max-w-7xl px-6 py-10">
+          <div className="mb-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-300">
+              Membership Options
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Let people understand the value before they choose a level.
+            </h2>
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-3">
+            <TierCard
+              tier="Standard"
+              price="$149"
+              cadence="month"
+              subtitle="Best for newer entrepreneurs who want structure, templates, and a direct starting point."
+              features={[
+                "Access to hiddencreditsecrets.com",
+                "10 credit repair templates",
+                "1 monthly coaching call on Zoom",
+              ]}
+              cta="Get Started"
+              accent="emerald"
+            />
+
+            <TierCard
+              tier="Premium"
+              price="$997"
+              cadence="year"
+              subtitle="For committed operators who want deeper material, stronger training, and more live support."
+              features={[
+                "Everything in Standard",
+                "Credit repair course",
+                "2 monthly coaching calls on Zoom",
+              ]}
+              cta="Start with Premium"
+              accent="sky"
+            />
+
+            <TierCard
+              tier="VIP"
+              price="$1,497"
+              cadence="year"
+              subtitle="For serious members who want the closest access and private proximity to Corey."
+              features={[
+                "Everything in Standard & Premium",
+                "All 6 eBooks free download",
+                "Clear Path Pilot Car Course",
+                "2 monthly coaching calls on Zoom",
+              ]}
+              cta="Apply for VIP Access"
+              accent="violet"
+              featured
+            />
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-6 py-14">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-400">
+              What This Does For You
             </p>
 
-            {selected && (
-              <div className="mt-6 max-h-[720px] overflow-y-auto pr-2">
-                <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="min-w-0">
-                      <h4 className="text-[1.65rem] leading-tight font-semibold break-words">
-                        {selected.name}
-                      </h4>
-                      <p className="mt-2 text-sm leading-6 text-slate-400">
-                        {selected.state} • {selected.industry} • {selected.status}
-                      </p>
-                    </div>
-                    <span
-                      className={`inline-block shrink-0 min-w-[88px] text-center rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap ${tierClass(
-                        selected.tier
-                      )}`}
-                    >
-                      {selected.tier}
-                    </span>
-                  </div>
+            <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              A premium Corey presentation that feels credible, clear, and built for real use.
+            </h3>
 
-                  <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div className="min-w-0 rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        Score
-                      </div>
-                      <div className="mt-2 text-3xl font-semibold">
-                        {selected.score}
-                      </div>
-                    </div>
-                    <div className="min-w-0 rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        Est. Value
-                      </div>
-                      <div className="mt-2 text-[1.28rem] leading-tight font-semibold whitespace-nowrap">
-                        {selected.estimatedValue}
-                      </div>
-                    </div>
-                    <div className="min-w-0 rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        Age
-                      </div>
-                      <div className="mt-2 text-2xl font-semibold whitespace-nowrap">
-                        {selected.age} years
-                      </div>
-                    </div>
-                    <div className="min-w-0 rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        Readiness
-                      </div>
-                      <div
-                        className={`mt-2 text-2xl font-semibold ${readinessClass(
-                          selected.readiness
-                        )}`}
-                      >
-                        {selected.readiness}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-300">
+              This version keeps the polished visual style while using language, structure,
+              proof points, and tier presentation that feel stronger for serious visitors.
+            </p>
 
-                <div className="mt-5">
-                  <h5 className="mb-3 text-sm uppercase tracking-[0.22em] text-slate-500">
-                    Scoring Signals
-                  </h5>
-                  <div className="space-y-3">
-                    {signals.map((s) => (
-                      <div
-                        key={s.label}
-                        className="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900 p-4"
-                      >
-                        <div className="text-sm text-slate-300">{s.label}</div>
-                        <div className="font-semibold text-white">{s.value}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="my-6 h-px bg-slate-800" />
-
-                <div>
-                  <h5 className="mb-3 text-sm uppercase tracking-[0.22em] text-slate-500">
-                    Associated Products & Services
-                  </h5>
-                  <div className="space-y-3">
-                    {services.slice(0, 3).map((service) => {
-                      const Icon = service.icon;
-                      return (
-                        <div
-                          key={service.title}
-                          className="rounded-2xl border border-slate-800 bg-slate-900 p-4"
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-2.5">
-                              <Icon className="h-4 w-4 text-indigo-300" />
-                            </div>
-                            <div>
-                              <div className="font-medium text-white">
-                                {service.title}
-                              </div>
-                              <div className="mt-1 text-sm leading-6 text-slate-400">
-                                {service.description}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="mt-6 rounded-3xl border border-indigo-500/20 bg-indigo-500/10 p-5">
-                  <div className="text-sm uppercase tracking-[0.24em] text-indigo-300">
-                    Suggested Next Action
-                  </div>
-                  <div className="mt-2 text-lg font-semibold">
-                    Initiate acquisition workflow + premium advisory packaging
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    This entity is a strong candidate for premium packaging:
-                    ranked opportunity listing, advisory outreach, protection
-                    strategy, and investor-aligned concierge support.
-                  </p>
-                  <button className="mt-4 flex items-center rounded-xl bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500">
-                    Open Deal Workflow
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-            )}
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">
+                Continue to Phase 2
+              </button>
+              <button className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                Add Real Brand Assets
+              </button>
+            </div>
           </div>
-        </div>
-
-        <div className="mt-10">
-          <div className="mb-6 flex flex-wrap items-center gap-3">
-            <span className="rounded-2xl border border-slate-800 bg-slate-900 px-4 py-2 text-sm text-slate-200">
-              Services
-            </span>
-            <span className="rounded-2xl border border-slate-800 bg-slate-900 px-4 py-2 text-sm text-slate-200">
-              How It Works
-            </span>
-            <span className="rounded-2xl border border-slate-800 bg-slate-900 px-4 py-2 text-sm text-slate-200">
-              Investor Story
-            </span>
-          </div>
-
-          <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
-            {services.map((s) => {
-              const Icon = s.icon;
-              return (
-                <div
-                  key={s.title}
-                  className="rounded-3xl border border-slate-800 bg-slate-950/70 p-6 text-white"
-                >
-                  <div className="mb-4 inline-flex rounded-2xl border border-slate-800 bg-slate-900 p-3">
-                    <Icon className="h-5 w-5 text-indigo-300" />
-                  </div>
-                  <div className="text-lg font-semibold">{s.title}</div>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">
-                    {s.description}
-                  </p>
-                  <button className="mt-4 flex items-center px-0 text-indigo-300 hover:text-indigo-200">
-                    Explore module <ArrowRight className="ml-1 h-4 w-4" />
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-10 grid gap-4 lg:grid-cols-4">
-            {architecture.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/70 p-6 text-white"
-                >
-                  <div className="absolute right-4 top-4 text-5xl font-semibold text-slate-800">
-                    0{idx + 1}
-                  </div>
-                  <div className="mb-4 inline-flex rounded-2xl border border-slate-800 bg-slate-900 p-3">
-                    <Icon className="h-5 w-5 text-indigo-300" />
-                  </div>
-                  <div className="text-lg font-semibold">{item.title}</div>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">
-                    {item.body}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
-            {investors.map((section) => (
-              <div
-                key={section.title}
-                className="rounded-3xl border border-slate-800 bg-slate-950/70 p-6 text-white"
-              >
-                <h4 className="text-xl font-semibold">{section.title}</h4>
-                <div className="mt-4 space-y-3">
-                  {section.bullets.map((bullet) => (
-                    <div
-                      key={bullet}
-                      className="flex items-start gap-3 rounded-2xl border border-slate-800 bg-slate-900 p-4"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-300" />
-                      <p className="text-sm leading-6 text-slate-300">
-                        {bullet}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }
 
-function Storyboard() {
-  const pages = [
-    {
-      title: "Access Portal",
-      icon: Lock,
-      text: "Investor-safe login experience with private access branding and premium trust cues.",
-    },
-    {
-      title: "Deal Dashboard",
-      icon: FileBarChart,
-      text: "High-level intelligence cards, top opportunities, and state-level acquisition flow.",
-    },
-    {
-      title: "Ranked Listings",
-      icon: Database,
-      text: "Sortable marketplace by score, price, age, and acquisition readiness.",
-    },
-    {
-      title: "Entity Detail",
-      icon: Sparkles,
-      text: "A due-diligence style profile showing value signals, risks, and associated services.",
-    },
-    {
-      title: "Investor Overview",
-      icon: LineChart,
-      text: "Product story, revenue model, market framing, and platform defensibility for partners.",
-    },
-    {
-      title: "Services Layer",
-      icon: Users,
-      text: "Asset protection, advisory, concierge acquisition, and premium member pathways.",
-    },
-  ];
-
+function MobileLayout() {
   return (
-    <div className="bg-slate-950 px-6 pb-16 text-white lg:px-10">
-      <div className="mx-auto max-w-7xl rounded-[2rem] border border-slate-800 bg-slate-950/70 p-8 shadow-xl">
-        <div className="mb-8 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <div className="text-sm uppercase tracking-[0.26em] text-slate-500">
-              Storyboard View
+    <div className="block lg:hidden">
+      <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950/90 backdrop-blur">
+        <div className="px-4 py-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
+              <LeagueWordmark size="xs" />
             </div>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight">
-              What the product becomes when fully built out
-            </h3>
+            <button className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs text-slate-200">
+              Login
+            </button>
           </div>
-          <span className="w-fit rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-sm text-slate-200">
-            Pitch-ready navigation model
-          </span>
         </div>
+      </header>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {pages.map((page) => {
-            const Icon = page.icon;
-            return (
-              <div
-                key={page.title}
-                className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6 text-white"
-              >
-                <div className="mb-4 inline-flex rounded-2xl border border-slate-800 bg-slate-950 p-3">
-                  <Icon className="h-5 w-5 text-indigo-300" />
-                </div>
-                <div className="text-lg font-semibold">{page.title}</div>
-                <p className="mt-2 text-sm leading-6 text-slate-400">
-                  {page.text}
-                </p>
+      <main className="px-4 pb-10 pt-4">
+        <section>
+          <div className="inline-flex rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-sky-200">
+            Wealth Education • Deals • Access
+          </div>
+
+          <h1 className="mt-5 text-5xl font-semibold leading-[0.96] tracking-tight text-white">
+            Access funding, credit, and real deals.
+          </h1>
+
+          <p className="mt-4 text-sm leading-7 text-slate-300">
+            Built for serious operators ready to move.
+          </p>
+
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <button className="rounded-xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-slate-950">
+              Watch Overview
+            </button>
+            <button className="rounded-xl border border-sky-500/20 bg-sky-500/10 px-4 py-3 text-sm font-semibold text-sky-200">
+              View Options
+            </button>
+          </div>
+
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            <CompactStat value="11" label="Members" accent="emerald" />
+            <CompactStat value="$2.1M+" label="Raised" accent="sky" />
+            <CompactStat value="47" label="Deals" accent="violet" />
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <div className="mb-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
+              Membership Options
+            </p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">
+              Start where you fit.
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-slate-300">
+              Clear paths. Real access. No guessing.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <TierCard
+              tier="Standard"
+              price="$149"
+              cadence="month"
+              subtitle="For newer entrepreneurs who want structure and a real starting point."
+              features={[
+                "Access to hiddencreditsecrets.com",
+                "10 credit repair templates",
+                "1 monthly coaching call on Zoom",
+              ]}
+              cta="Get Started"
+              accent="emerald"
+            />
+
+            <TierCard
+              tier="Premium"
+              price="$997"
+              cadence="year"
+              subtitle="For committed operators who want stronger material and more support."
+              features={[
+                "Everything in Standard",
+                "Credit repair course",
+                "2 monthly coaching calls on Zoom",
+              ]}
+              cta="Start with Premium"
+              accent="sky"
+            />
+
+            <TierCard
+              tier="VIP"
+              price="$1,497"
+              cadence="year"
+              subtitle="For members who want the closest access and private proximity to Corey."
+              features={[
+                "Everything in Standard & Premium",
+                "All 6 eBooks free download",
+                "Clear Path Pilot Car Course",
+                "2 monthly coaching calls on Zoom",
+              ]}
+              cta="Apply for VIP Access"
+              accent="violet"
+              featured
+            />
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <div className="mb-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
+              Real Wins
+            </p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">
+              Proof people can respect.
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            <StoryCard
+              name="Marcus Ellison"
+              role="Logistics Operator • Texas"
+              result="$180K Accessed"
+              body="Used structure, positioning, and improved fundability to move from stalled growth into real working capital conversations."
+            />
+            <StoryCard
+              name="Andre Wallace"
+              role="Real Estate Entrepreneur • Florida"
+              result="3 Deals Closed"
+              body="Came in looking for clarity, tightened the strategy, and used the right tools to move with much more confidence and discipline."
+            />
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <div className="space-y-3">
+            <ExpandableSection
+              title="What’s inside the League"
+              subtitle="Tap to see what members actually get"
+              defaultOpen={false}
+            >
+              <div className="space-y-3 text-sm leading-7 text-slate-300">
+                <p>Credit education, structured guidance, live calls, templates, and a clearer path toward funding readiness.</p>
               </div>
-            );
-          })}
-        </div>
-      </div>
+            </ExpandableSection>
+
+            <ExpandableSection
+              title="Why members join"
+              subtitle="Quick reasons people step in"
+              defaultOpen={false}
+            >
+              <div className="space-y-2 text-sm text-slate-300">
+                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">They want a real framework, not random internet advice.</div>
+                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">They want access to better funding conversations.</div>
+                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">They want direct exposure to how Corey thinks.</div>
+              </div>
+            </ExpandableSection>
+
+            <ExpandableSection
+              title="How it works"
+              subtitle="Fast view of the path"
+              defaultOpen={false}
+            >
+              <div className="space-y-2 text-sm text-slate-300">
+                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Join the right tier</div>
+                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Learn the framework</div>
+                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Apply the system</div>
+                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Move toward better opportunities</div>
+              </div>
+            </ExpandableSection>
+
+            <ExpandableSection
+              title="What serious members care about"
+              subtitle="For investors and operators"
+              defaultOpen={false}
+            >
+              <div className="grid grid-cols-2 gap-3">
+                <CompactStat value="$28K" label="Avg deal size" accent="amber" />
+                <CompactStat value="12" label="Qualified clients" accent="violet" />
+                <CompactStat value="3" label="VIP members" accent="emerald" />
+                <CompactStat value="4" label="New this month" accent="sky" />
+              </div>
+            </ExpandableSection>
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
+              Next Step
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
+              Step inside the League.
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-slate-300">
+              Start with the right tier, learn the system, and move with clarity.
+            </p>
+
+            <div className="mt-5 grid grid-cols-1 gap-3">
+              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950">
+                View Membership Options
+              </button>
+              <button className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white">
+                Watch Overview
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
 
 export default function App() {
-  const [user, setUser] = useState(null);
-  const [loginError, setLoginError] = useState("");
-
-  const handleLogin = (username, password) => {
-    const found = mockUsers.find(
-      (u) => u.username === username && u.password === password
-    );
-
-    if (found) {
-      setUser(found);
-      setLoginError("");
-      return;
-    }
-
-    setLoginError("Invalid username or password. Try investor/demo123 or brian/admin123.");
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    setLoginError("");
-  };
-
-  return user ? (
-    <div>
-      <Dashboard user={user} onLogout={handleLogout} />
-      <Storyboard />
+  return (
+    <div className="min-h-screen overflow-x-hidden bg-slate-950 text-white">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.12),transparent_24%),radial-gradient(circle_at_top_right,rgba(16,185,129,0.15),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.12),transparent_22%)]" />
+      <div className="relative">
+        <DesktopLayout />
+        <MobileLayout />
+      </div>
     </div>
-  ) : (
-    <Hero onLogin={handleLogin} loginError={loginError} />
   );
 }

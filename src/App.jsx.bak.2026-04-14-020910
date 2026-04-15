@@ -1,0 +1,313 @@
+export default function App() {
+  const tiers = [
+    {
+      name: "Standard",
+      price: "$149/mo",
+      subtitle: "For business owners getting started",
+      features: [
+        "Credit repair templates",
+        "Private member portal access",
+        "1 monthly group coaching call",
+        "Funding readiness checklist",
+      ],
+    },
+    {
+      name: "Premium",
+      price: "$997/yr",
+      subtitle: "For members ready to move faster",
+      features: [
+        "Everything in Standard",
+        "Full credit repair course",
+        "2 monthly coaching calls",
+        "Business funding roadmap",
+      ],
+      featured: true,
+    },
+    {
+      name: "VIP",
+      price: "$1,497/yr",
+      subtitle: "For serious operators",
+      features: [
+        "Everything in Premium",
+        "All 6 ebooks",
+        "Pilot car course",
+        "Priority coaching access",
+      ],
+    },
+  ];
+
+  const steps = [
+    {
+      title: "Fix What’s Blocking Approval",
+      text: "Show visitors the exact mistakes that keep them from getting approved and how your system helps correct them.",
+    },
+    {
+      title: "Structure Your Business Correctly",
+      text: "Position the company the right way so lenders see a fundable business instead of a risky one.",
+    },
+    {
+      title: "Move Toward Real Funding",
+      text: "Use proven systems, templates, and coaching to pursue business credit and funding with confidence.",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote:
+        "This should feel less like a random course and more like a clear path to business credit, structure, and funding.",
+      name: "Future Case Study",
+      role: "Positioning Placeholder",
+    },
+    {
+      quote:
+        "The strongest version of this offer is one that leads with transformation first, then explains the tools and support behind it.",
+      name: "Conversion Direction",
+      role: "Messaging Placeholder",
+    },
+    {
+      quote:
+        "Traffic will perform far better once the page makes the outcome obvious and reduces signup friction.",
+      name: "Funnel Strategy",
+      role: "Optimization Placeholder",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-white">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-400 font-black text-slate-950 shadow-lg shadow-amber-400/20">
+              EL
+            </div>
+            <div>
+              <div className="font-semibold tracking-wide">The Entrepreneurs League</div>
+              <div className="text-xs text-white/60">
+                Premium credit, funding, and business structure community
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden items-center gap-6 text-sm text-white/75 md:flex">
+            <a href="#how-it-works" className="hover:text-white">How It Works</a>
+            <a href="#results" className="hover:text-white">Results</a>
+            <a href="#pricing" className="hover:text-white">Plans</a>
+          </div>
+
+          <button className="rounded-2xl bg-amber-400 px-5 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/20">
+            Apply Now
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900" />
+          <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
+            <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <div className="inline-flex items-center rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-2 text-sm text-amber-300">
+                  Private community for serious entrepreneurs
+                </div>
+
+                <h1 className="mt-6 text-4xl font-black leading-tight tracking-tight md:text-6xl">
+                  Learn how to <span className="text-amber-400">repair credit</span>, structure your business correctly, and move toward <span className="text-blue-400">real funding</span>.
+                </h1>
+
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">
+                  This is not a get-rich-quick community. It is a guided path for people who want stronger business structure, better lender positioning, and a clearer route to growth.
+                </p>
+
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <button className="rounded-2xl bg-amber-400 px-6 py-4 text-base font-bold text-slate-950 shadow-xl shadow-amber-400/20">
+                    See Membership Options
+                  </button>
+                  <button className="rounded-2xl border border-white/15 px-6 py-4 text-base font-semibold text-white hover:bg-white/5">
+                    Watch Overview
+                  </button>
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-6 text-sm text-white/60">
+                  <span>11 active members</span>
+                  <span>Monthly live coaching</span>
+                  <span>Templates, courses, and private access</span>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-2xl shadow-black/30 backdrop-blur">
+                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800">
+                  <div className="relative z-10 px-8 text-center">
+                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/10 text-2xl">
+                      ▶
+                    </div>
+                    <div className="mt-5 text-xl font-semibold">Founder Overview Video</div>
+                    <p className="mt-2 text-sm text-white/60">
+                      A cleaner, higher-trust hero area that leads with transformation before asking for commitment.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-5 grid grid-cols-3 gap-3 text-center text-sm">
+                  <div className="rounded-2xl border border-white/10 bg-slate-900/70 py-4">
+                    <div className="text-xl font-bold text-amber-400">$149</div>
+                    <div className="text-white/60">starting point</div>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-slate-900/70 py-4">
+                    <div className="text-xl font-bold text-blue-400">3</div>
+                    <div className="text-white/60">membership tiers</div>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-slate-900/70 py-4">
+                    <div className="text-xl font-bold text-emerald-400">Live</div>
+                    <div className="text-white/60">coaching support</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-20">
+          <div className="max-w-2xl">
+            <div className="text-sm uppercase tracking-[0.25em] text-amber-400/80">How it works</div>
+            <h2 className="mt-4 text-3xl font-black md:text-4xl">
+              A clearer path from confusion to credibility.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-white/70">
+              Instead of overwhelming people with generic promises, this version shows a simple progression the audience can actually believe in.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {steps.map((step, index) => (
+              <div
+                key={step.title}
+                className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 shadow-xl shadow-black/20"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-400 font-black text-slate-950">
+                  {index + 1}
+                </div>
+                <h3 className="mt-5 text-xl font-bold">{step.title}</h3>
+                <p className="mt-3 leading-7 text-white/65">{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="results" className="border-y border-white/10 bg-white/[0.03]">
+          <div className="mx-auto max-w-7xl px-6 py-20">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-2xl">
+                <div className="text-sm uppercase tracking-[0.25em] text-blue-300/80">Trust and proof</div>
+                <h2 className="mt-4 text-3xl font-black md:text-4xl">
+                  Testimonials should sell outcomes, not just friendship.
+                </h2>
+                <p className="mt-4 text-lg leading-8 text-white/70">
+                  These blocks are placeholders for stronger social proof: specific wins, clearer transformation, and more direct credibility.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">
+                Goal: make every testimonial answer “what changed?”
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+              {testimonials.map((item) => (
+                <div key={item.name} className="rounded-3xl border border-white/10 bg-slate-950/60 p-7">
+                  <div className="text-4xl text-amber-400">“</div>
+                  <p className="mt-3 leading-8 text-white/75">{item.quote}</p>
+                  <div className="mt-6 border-t border-white/10 pt-5">
+                    <div className="font-semibold">{item.name}</div>
+                    <div className="text-sm text-white/50">{item.role}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing" className="mx-auto max-w-7xl px-6 py-20">
+          <div className="max-w-2xl">
+            <div className="text-sm uppercase tracking-[0.25em] text-amber-400/80">Membership options</div>
+            <h2 className="mt-4 text-3xl font-black md:text-4xl">
+              Pricing works better after the value is obvious.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-white/70">
+              This layout makes the upgrade path clearer and gives each plan a stronger reason to exist.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {tiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`rounded-3xl border p-8 shadow-2xl ${
+                  tier.featured
+                    ? "border-amber-400/40 bg-gradient-to-b from-amber-400/10 to-white/[0.04] shadow-amber-400/10"
+                    : "border-white/10 bg-white/[0.03] shadow-black/20"
+                }`}
+              >
+                {tier.featured && (
+                  <div className="mb-5 inline-flex rounded-full bg-amber-400 px-3 py-1 text-xs font-bold uppercase tracking-wide text-slate-950">
+                    Best value
+                  </div>
+                )}
+
+                <div className="text-3xl font-black">{tier.price}</div>
+                <div className="mt-3 text-xl font-bold">{tier.name}</div>
+                <div className="mt-2 text-white/60">{tier.subtitle}</div>
+
+                <ul className="mt-6 space-y-4 text-white/75">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className="flex gap-3">
+                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  className={`mt-8 w-full rounded-2xl px-5 py-4 font-bold transition ${
+                    tier.featured
+                      ? "bg-amber-400 text-slate-950"
+                      : "border border-white/15 bg-transparent text-white hover:bg-white/5"
+                  }`}
+                >
+                  {tier.featured
+                    ? "Choose Premium"
+                    : tier.name === "Standard"
+                    ? "Start with Standard"
+                    : "Join VIP"}
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-6 pb-24">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 p-10 shadow-2xl shadow-black/30 md:p-14">
+            <div className="max-w-3xl">
+              <div className="text-sm uppercase tracking-[0.25em] text-blue-300/80">Next step</div>
+              <h2 className="mt-4 text-3xl font-black leading-tight md:text-5xl">
+                Build the polished front-end first, then drive high-intent traffic into a funnel that can actually convert.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-white/70">
+                This mockup is not the final site. It is a directionally stronger version designed to show how the offer can feel more premium, more trustworthy, and more conversion-focused.
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <button className="rounded-2xl bg-amber-400 px-6 py-4 text-base font-bold text-slate-950 shadow-xl shadow-amber-400/20">
+                Approve Direction
+              </button>
+              <button className="rounded-2xl border border-white/15 px-6 py-4 text-base font-semibold text-white hover:bg-white/5">
+                Review Funnel Strategy
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
