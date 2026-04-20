@@ -228,6 +228,14 @@ function DesktopLayout() {
               Login
             </button>
           </div>
+          <div className="ml-auto flex items-center gap-4">
+            <button
+              onClick={() => window.location.href = "/login"}
+              className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+            >
+              Login
+            </button>
+          </div>
           <div className="flex items-center gap-4">
             <div className="hidden text-xs tracking-wide text-slate-400 sm:block">
               Private Access • Structured Entry
