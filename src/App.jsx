@@ -79,84 +79,48 @@ function BuildingMark({ size = "md" }) {
 }
 
 function LeagueWordmark({ size = "md" }) {
-  const textSizes = {
-    xs: "text-[1rem]",
-    sm: "text-[1.28rem]",
-    md: "text-[1.85rem]",
+  const map = {
+    sm: {
+      mark: "sm",
+      textWrap: "gap-2",
+      title: "text-lg",
+      subtitle: "text-[10px] tracking-[0.28em]",
+    },
+    md: {
+      mark: "md",
+      textWrap: "gap-3",
+      title: "text-2xl",
+      subtitle: "text-xs tracking-[0.32em]",
+    },
   };
 
+  const c = map[size];
+
   return (
-    <div className="flex items-center gap-2.5">
-      <BuildingMark size={size} />
-      <span className={`${textSizes[size]} font-semibold tracking-tight text-white`}>
-        Entrepreneur’s League
-      </span>
+    <div className={`flex items-center ${c.textWrap}`}>
+      <BuildingMark size={c.mark} />
+      <div>
+        <div className={`${c.title} font-semibold tracking-tight text-white`}>Entrepreneur’s League</div>
+        <div className={`${c.subtitle} uppercase text-slate-400`}>Private Access Platform</div>
+      </div>
     </div>
   );
 }
 
 function StatCard({ value, label, accent = "emerald" }) {
-  const accentMap = {
-    emerald: "border-emerald-500/20 bg-emerald-500/5",
-    sky: "border-sky-500/20 bg-sky-500/5",
-    violet: "border-violet-500/20 bg-violet-500/5",
-    amber: "border-amber-500/20 bg-amber-500/5",
+  const tones = {
+    emerald: "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
+    sky: "border-sky-400/20 bg-sky-500/10 text-sky-300",
+    violet: "border-violet-400/20 bg-violet-500/10 text-violet-300",
+    amber: "border-amber-400/20 bg-amber-500/10 text-amber-300",
   };
 
   return (
-    <div className={`rounded-3xl border p-5 backdrop-blur-md ${accentMap[accent]}`}>
-      <div className="text-3xl font-semibold text-white">{value}</div>
-      <div className="mt-2 text-sm text-slate-300">{label}</div>
-    </div>
-  );
-}
-
-function CompactStat({ value, label, accent = "emerald" }) {
-  const accentMap = {
-    emerald: "border-emerald-500/20 bg-emerald-500/5",
-    sky: "border-sky-500/20 bg-sky-500/5",
-    violet: "border-violet-500/20 bg-violet-500/5",
-    amber: "border-amber-500/20 bg-amber-500/5",
-  };
-
-  return (
-    <div className={`rounded-2xl border p-4 ${accentMap[accent]}`}>
-      <div className="text-2xl font-semibold tracking-tight text-white">{value}</div>
-      <div className="mt-1 text-xs text-slate-300">{label}</div>
-    </div>
-  );
-}
-
-function ProofCard({ title, value, detail, accent = "emerald" }) {
-  const accentMap = {
-    emerald: "from-emerald-500/12 to-emerald-400/5 border-emerald-500/20",
-    sky: "from-sky-500/12 to-sky-400/5 border-sky-500/20",
-    violet: "from-violet-500/12 to-violet-400/5 border-violet-500/20",
-    amber: "from-amber-500/12 to-amber-400/5 border-amber-500/20",
-  };
-
-  return (
-    <div className={`rounded-3xl border bg-gradient-to-br ${accentMap[accent]} p-6`}>
-      <div className="text-xs uppercase tracking-[0.24em] text-slate-400">{title}</div>
-      <div className="mt-3 text-4xl font-semibold tracking-tight text-white">{value}</div>
-      <div className="mt-2 text-sm leading-6 text-slate-300">{detail}</div>
-    </div>
-  );
-}
-
-function StoryCard({ name, role, result, body }) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className="text-lg font-semibold text-white">{name}</div>
-          <div className="mt-1 text-sm text-slate-400">{role}</div>
-        </div>
-        <div className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
-          {result}
-        </div>
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+      <div className={`inline-flex rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${tones[accent]}`}>
+        {label}
       </div>
-      <p className="mt-4 text-sm leading-7 text-slate-300">{body}</p>
+      <div className="mt-3 text-3xl font-semibold tracking-tight text-white">{value}</div>
     </div>
   );
 }
@@ -164,90 +128,75 @@ function StoryCard({ name, role, result, body }) {
 function FeatureCard({ eyebrow, title, body }) {
   return (
     <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-        {eyebrow}
-      </p>
-      <h3 className="mt-4 text-2xl font-semibold text-white">{title}</h3>
+      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">{eyebrow}</p>
+      <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">{title}</h3>
       <p className="mt-3 text-sm leading-7 text-slate-300">{body}</p>
     </div>
   );
 }
 
-function PathCard({ title, body }) {
+function ProofCard({ title, value, detail, accent = "emerald" }) {
+  const tones = {
+    emerald: "text-emerald-300 border-emerald-400/20 bg-emerald-400/10",
+    sky: "text-sky-300 border-sky-500/20 bg-sky-500/10",
+    violet: "text-violet-300 border-violet-500/20 bg-violet-500/10",
+    amber: "text-amber-300 border-amber-400/20 bg-amber-500/10",
+  };
+
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-      <p className="font-semibold text-white">{title}</p>
-      <p className="mt-2 text-sm text-slate-300">{body}</p>
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+      <div className={`inline-flex rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${tones[accent]}`}>
+        {title}
+      </div>
+      <div className="mt-4 text-4xl font-semibold tracking-tight text-white">{value}</div>
+      <p className="mt-3 text-sm leading-7 text-slate-300">{detail}</p>
     </div>
   );
 }
 
-function TierCard({
-  tier,
-  price,
-  cadence,
-  subtitle,
-  features,
-  cta,
-  accent = "emerald",
-  featured = false,
-}) {
-  const accentMap = {
+function TierCard({ tier, price, cadence, subtitle, features, cta, accent = "emerald" }) {
+  const accents = {
     emerald: {
-      ring: "border-emerald-500/30",
-      badge: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
+      badge: "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
       button: "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
-      dot: "bg-emerald-400",
+      border: "hover:border-emerald-400/25",
     },
     sky: {
-      ring: "border-sky-500/30",
-      badge: "border-sky-500/30 bg-sky-500/10 text-sky-300",
-      button: "bg-sky-500 text-slate-950 hover:bg-sky-400",
-      dot: "bg-sky-400",
+      badge: "border-sky-500/20 bg-sky-500/10 text-sky-300",
+      button: "bg-sky-400 text-slate-950 hover:bg-sky-300",
+      border: "hover:border-sky-500/25",
     },
     violet: {
-      ring: "border-violet-500/30",
-      badge: "border-violet-500/30 bg-violet-500/10 text-violet-300",
-      button: "bg-violet-500 text-white hover:bg-violet-400",
-      dot: "bg-violet-400",
+      badge: "border-violet-500/20 bg-violet-500/10 text-violet-300",
+      button: "bg-violet-400 text-slate-950 hover:bg-violet-300",
+      border: "hover:border-violet-500/25",
     },
   };
 
-  const a = accentMap[accent];
+  const a = accents[accent];
 
   return (
-    <div
-      className={`flex h-full flex-col rounded-3xl border bg-slate-950/70 p-6 shadow-xl ${
-        featured ? `${a.ring} ring-1 ring-white/10` : "border-white/10"
-      }`}
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className={`inline-flex rounded-full border px-3 py-1 text-xs font-medium ${a.badge}`}>
-            {tier}
-          </div>
-          <div className="mt-4 text-4xl font-semibold tracking-tight text-white">
-            {price}
-            <span className="ml-1 text-xl text-slate-300">/{cadence}</span>
-          </div>
-          <p className="mt-3 text-sm leading-6 text-slate-300">{subtitle}</p>
+    <div className={`flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 transition ${a.border}`}>
+      <div className={`inline-flex w-fit rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${a.badge}`}>
+        {tier}
+      </div>
+
+      <div className="mt-5">
+        <div className="flex items-end gap-2">
+          <span className="text-4xl font-semibold tracking-tight text-white">{price}</span>
+          <span className="pb-1 text-sm text-slate-400">/{cadence}</span>
         </div>
-
-        {featured && (
-          <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
-            Most Direct Path
-          </div>
-        )}
+        <p className="mt-4 text-sm leading-7 text-slate-300">{subtitle}</p>
       </div>
 
-      <div className="mt-6 space-y-3 pb-8">
+      <ul className="mt-6 space-y-3 text-sm text-slate-200">
         {features.map((feature) => (
-          <div key={feature} className="flex items-start gap-3">
-            <div className={`mt-2 h-2.5 w-2.5 rounded-full ${a.dot}`} />
-            <p className="text-sm leading-6 text-slate-200">{feature}</p>
-          </div>
+          <li key={feature} className="flex items-start gap-3">
+            <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-slate-300" />
+            <span>{feature}</span>
+          </li>
         ))}
-      </div>
+      </ul>
 
       <button className={`mt-auto w-full rounded-xl px-5 py-3 text-sm font-semibold transition ${a.button}`}>
         {cta}
@@ -256,72 +205,19 @@ function TierCard({
   );
 }
 
-function Chevron({ open }) {
+function PathCard({ title, body }) {
   return (
-    <span
-      className={`inline-block text-slate-300 transition-transform duration-200 ${
-        open ? "rotate-90" : ""
-      }`}
-    >
-      ▶
-    </span>
-  );
-}
-
-function ExpandableSection({ title, subtitle, children, defaultOpen = false }) {
-  const [open, setOpen] = useState(defaultOpen);
-
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/5">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left"
-      >
-        <div>
-          <div className="text-sm font-semibold text-white">{title}</div>
-          {subtitle ? <div className="mt-1 text-xs text-slate-400">{subtitle}</div> : null}
-        </div>
-        <Chevron open={open} />
-      </button>
-
-      {open ? <div className="border-t border-white/10 px-4 py-4">{children}</div> : null}
+    <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+      <p className="text-sm font-semibold text-white">{title}</p>
+      <p className="mt-1 text-sm leading-7 text-slate-300">{body}</p>
     </div>
   );
 }
 
 function DesktopLayout() {
   return (
-    <div className="hidden lg:block">
-      <header className="border-b border-white/10 bg-slate-950/85 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-3 backdrop-blur-md">
-            <div className="flex items-center gap-4">
-              <LeagueWordmark size="sm" />
-              <div className="hidden h-8 w-px bg-white/10 sm:block" />
-              <div className="hidden sm:block">
-                <div className="text-[11px] uppercase tracking-[0.32em] text-slate-300">
-                  Corey Presentation
-                </div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.28em] text-emerald-300">
-                  Private Wealth Platform
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs text-slate-200 transition hover:bg-white/15">
-              Login
-            </button>
-            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
-              Ready to Deploy
-            </span>
-          </div>
-        </div>
-      </header>
-
-      <main>
+    <div className="hidden md:block">
+      <main className="px-4 pb-10 pt-4">
         <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1.04fr_0.96fr] lg:py-24">
           <div className="max-w-3xl">
             <div className="mb-5 inline-flex rounded-full border border-sky-400/20 bg-sky-500/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-sky-200">
@@ -329,23 +225,47 @@ function DesktopLayout() {
             </div>
 
             <h1 className="text-5xl font-semibold tracking-tight text-white md:text-6xl lg:text-7xl">
-              Access real funding, business credit, and strategic deals — all in one place.
+              Access capital, credit, and strategic deals — from the right position.
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-              This concept is built to help your visitors quickly understand what you offer,
-              why it matters, and what serious next step they should take.
+              This is designed to position serious people in front of real opportunity — not
+              just information.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">
-                Watch Overview
+              <button
+                onClick={() =>
+                  document.getElementById("overview")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              >
+                Enter the Room
               </button>
-              <button className="rounded-xl border border-sky-500/20 bg-sky-500/10 px-5 py-3 text-sm font-semibold text-sky-200 transition hover:bg-sky-500/15">
-                See How It Works
+              <button
+                onClick={() =>
+                  document.getElementById("how-it-works")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="rounded-xl border border-sky-500/20 bg-sky-500/10 px-5 py-3 text-sm font-semibold text-sky-200 transition hover:bg-sky-500/15"
+              >
+                Understand the System
               </button>
-              <button className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-                Explore Membership Options
+              <button
+                onClick={() =>
+                  document.getElementById("membership")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Choose Your Level
               </button>
             </div>
 
@@ -364,62 +284,62 @@ function DesktopLayout() {
                 </div>
                 <h2 className="text-2xl font-semibold">Private Access Portal</h2>
                 <p className="mt-2 text-sm text-slate-300">
-                  Premium front-end concept for Corey’s brand, offers, and opportunity flow
+                  Private access portal for people ready to move with clarity, structure, and opportunity.
                 </p>
               </div>
 
               <div className="space-y-4">
                 <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-                  <p className="text-sm font-semibold text-white">1. Learn the Playbook</p>
+                  <p className="text-sm font-semibold text-white">1. Learn the System</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    Educational content, credibility, and a strong first impression.
+                    Understand how credit, capital, and opportunity fit together.
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-                  <p className="text-sm font-semibold text-white">2. See Where You Fit</p>
+                  <p className="text-sm font-semibold text-white">2. Find Your Position</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    Visitors can quickly tell whether they are here to learn, invest, or take action.
+                    See where you fit, what you qualify for, and what the next serious step looks like.
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-                  <p className="text-sm font-semibold text-white">3. Take the Next Serious Step</p>
+                  <p className="text-sm font-semibold text-white">3. Move With Intention</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    Strategy call, premium offer, or direct path into a real opportunity.
+                    Enter the right tier, access the right tools, and move toward real opportunities.
                   </p>
                 </div>
               </div>
 
               <div className="mt-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
-                <p className="text-sm font-semibold text-emerald-300">Positioning Statement</p>
+                <p className="text-sm font-semibold text-emerald-300">Positioning</p>
                 <p className="mt-2 text-sm leading-7 text-slate-200">
-                  This is designed to feel like a premium front door for people who want more
-                  than inspiration.
+                  This is not content.
+                  It is a controlled entry point into opportunity, capital, and deal flow.
                 </p>
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-200">
                 <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-3">
                   <div className="font-medium text-sky-300">Authority Layer</div>
-                  Clear positioning, premium presentation, and trust cues.
+                  Clear positioning, proof, and trust signals for serious visitors.
                 </div>
                 <div className="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-3">
                   <div className="font-medium text-violet-300">Access Layer</div>
-                  Serious visitors move naturally toward the right next step.
+                  A direct path into the right tier, offer, or next step.
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-4">
+        <section id="overview" className="mx-auto max-w-7xl px-6 py-4">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-400">
-              Proof, Not Fluff
+              Proof of Position
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Serious visitors respond to outcomes, not canned testimonials.
+              Serious visitors respond to outcomes, structure, and visible proof.
             </h2>
           </div>
 
@@ -471,22 +391,22 @@ function DesktopLayout() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-10">
+        <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-10">
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-                  Suggested Site Structure
+                  How It Works
                 </p>
                 <h3 className="mt-3 text-3xl font-semibold tracking-tight">
-                  One brand. Multiple ways to engage.
+                  A clear path from curiosity to access.
                 </h3>
 
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <PathCard title="Education Path" body="Videos, training, proof, and simple entry points." />
-                  <PathCard title="Consulting Path" body="A direct route for people ready to book time." />
-                  <PathCard title="Investor Path" body="A polished presentation for serious people." />
-                  <PathCard title="Premium Offer Path" body="High-value services and elite backend opportunities." />
+                  <PathCard title="Learn the System" body="Videos, training, proof, and a clear first step." />
+                  <PathCard title="Get Direct Guidance" body="A direct route for people ready to book time and move with intention." />
+                  <PathCard title="Access Opportunities" body="A polished path for serious people looking for strategic deals and capital." />
+                  <PathCard title="Enter the Inner Circle" body="High-value services, premium support, and the strongest next step." />
                 </div>
               </div>
 
@@ -517,7 +437,7 @@ function DesktopLayout() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-10">
+        <section id="membership" className="mx-auto max-w-7xl px-6 py-10">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-300">
               Membership Options
@@ -558,18 +478,16 @@ function DesktopLayout() {
 
             <TierCard
               tier="VIP"
-              price="$1,497"
+              price="$2497"
               cadence="year"
-              subtitle="For serious members who want the closest access and private proximity to Corey."
+              subtitle="High-touch support for serious entrepreneurs, investors, and people ready for direct strategy."
               features={[
-                "Everything in Standard & Premium",
-                "All 6 eBooks free download",
-                "Clear Path Pilot Car Course",
-                "2 monthly coaching calls on Zoom",
+                "Everything in Premium",
+                "Weekly live group coaching calls",
+                "1 private coaching call per month with Corey",
               ]}
-              cta="Apply for VIP Access"
+              cta="Apply for VIP"
               accent="violet"
-              featured
             />
           </div>
         </section>
@@ -577,16 +495,15 @@ function DesktopLayout() {
         <section className="mx-auto max-w-7xl px-6 py-14">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-400">
-              What This Does For You
+              Why It Matters
             </p>
 
             <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              A premium Corey presentation that feels credible, clear, and built for real use.
+              A premium entry point that feels credible, clear, and built for serious use.
             </h3>
 
             <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-300">
-              This version keeps the polished visual style while using language, structure,
-              proof points, and tier presentation that feel stronger for serious visitors.
+              This version keeps the polished visual style while using stronger language, clearer pathways, and a more believable route into action.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -605,48 +522,144 @@ function DesktopLayout() {
 }
 
 function MobileLayout() {
-  return (
-    <div className="block lg:hidden">
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950/90 backdrop-blur">
-        <div className="px-4 py-4">
-          <div className="flex items-center justify-between gap-3">
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
-              <LeagueWordmark size="xs" />
-            </div>
-            <button className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs text-slate-200">
-              Login
-            </button>
-          </div>
-        </div>
-      </header>
+  const [activePanel, setActivePanel] = useState("overview");
 
+  return (
+    <div className="md:hidden">
       <main className="px-4 pb-10 pt-4">
         <section>
-          <div className="inline-flex rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-sky-200">
-            Wealth Education • Deals • Access
+          <div className="rounded-[2rem] border border-white/10 bg-black/30 p-5 backdrop-blur-xl">
+            <div className="inline-flex rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-sky-200">
+              Wealth Education • Deals • Access
+            </div>
+
+            <div className="mt-4">
+              <LeagueWordmark size="sm" />
+            </div>
+
+            <h1 className="mt-5 text-4xl font-semibold leading-tight tracking-tight text-white">
+              Access funding, credit, and real deals.
+            </h1>
+
+            <p className="mt-4 text-sm leading-7 text-slate-300">
+              Built for serious operators ready to move.
+            </p>
+
+            <div className="mt-6 grid grid-cols-1 gap-3">
+              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950">
+                Watch Overview
+              </button>
+              <button
+                onClick={() => setActivePanel("options")}
+                className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white"
+              >
+                View Options
+              </button>
+            </div>
+
+            <div className="mt-8 grid grid-cols-3 gap-3">
+              <StatCard value="3" label="Paths" accent="emerald" />
+              <StatCard value="Clear" label="Flow" accent="sky" />
+              <StatCard value="High" label="Trust" accent="violet" />
+            </div>
+
+            <div className="mt-8 rounded-3xl border border-white/10 bg-slate-950/70 p-5">
+              <div className="overflow-hidden">
+                <LeagueWordmark size="sm" />
+              </div>
+              <p className="mt-4 text-sm leading-7 text-slate-300">
+                A private access portal built to help serious visitors move from interest to action.
+              </p>
+
+              <div className="mt-5 space-y-3">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-sm font-semibold text-white">Learn the system</p>
+                  <p className="mt-1 text-sm leading-7 text-slate-300">
+                    See how credit, capital, and opportunity work together.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-sm font-semibold text-white">Find your fit</p>
+                  <p className="mt-1 text-sm leading-7 text-slate-300">
+                    Understand whether you are here to learn, invest, or move directly.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-sm font-semibold text-white">Choose a serious next step</p>
+                  <p className="mt-1 text-sm leading-7 text-slate-300">
+                    Book, join, or apply based on your level of readiness.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
+                <p className="text-sm font-semibold text-emerald-300">Positioning</p>
+                <p className="mt-2 text-sm leading-7 text-slate-200">
+                  This is a controlled entry point into better opportunities.
+                </p>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <h1 className="mt-5 text-5xl font-semibold leading-[0.96] tracking-tight text-white">
-            Access funding, credit, and real deals.
-          </h1>
-
-          <p className="mt-4 text-sm leading-7 text-slate-300">
-            Built for serious operators ready to move.
-          </p>
-
-          <div className="mt-5 grid grid-cols-2 gap-3">
-            <button className="rounded-xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-slate-950">
-              Watch Overview
-            </button>
-            <button className="rounded-xl border border-sky-500/20 bg-sky-500/10 px-4 py-3 text-sm font-semibold text-sky-200">
-              View Options
-            </button>
+        <section className="mt-6">
+          <div className="grid gap-4">
+            <FeatureCard
+              eyebrow="Trust"
+              title="Look established"
+              body="Strong visuals and confident messaging instantly change how visitors feel."
+            />
+            <FeatureCard
+              eyebrow="Clarity"
+              title="Show the path"
+              body="Explain what Corey offers and why the next step matters."
+            />
+            <FeatureCard
+              eyebrow="Action"
+              title="Drive real leads"
+              body="Create a clean path into calls, offers, and opportunity."
+            />
           </div>
+        </section>
 
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            <CompactStat value="11" label="Members" accent="emerald" />
-            <CompactStat value="$2.1M+" label="Raised" accent="sky" />
-            <CompactStat value="47" label="Deals" accent="violet" />
+        <section className="mt-6">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
+              The System
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
+              One brand. Multiple ways to engage.
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              <PathCard title="Education Path" body="Videos, proof, and simple entry points." />
+              <PathCard title="Consulting Path" body="A direct route into paid guidance." />
+              <PathCard title="Investor Path" body="A sharper presentation for serious people." />
+              <PathCard title="Premium Offer Path" body="Elite services and backend opportunities." />
+            </div>
+
+            <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
+                Visitor Journey
+              </p>
+
+              <div className="mt-4 space-y-3">
+                <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-sm text-slate-200">
+                  Arrives on site
+                </div>
+                <div className="rounded-xl border border-sky-500/20 bg-sky-500/5 p-3 text-sm text-slate-200">
+                  Sees proof and authority
+                </div>
+                <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-sm text-slate-200">
+                  Understands the options
+                </div>
+                <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-3 text-sm font-semibold text-emerald-300">
+                  Serious lead captured
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -694,18 +707,16 @@ function MobileLayout() {
 
             <TierCard
               tier="VIP"
-              price="$1,497"
+              price="$2497"
               cadence="year"
-              subtitle="For members who want the closest access and private proximity to Corey."
+              subtitle="For serious people who want direct strategy and high-touch support."
               features={[
-                "Everything in Standard & Premium",
-                "All 6 eBooks free download",
-                "Clear Path Pilot Car Course",
-                "2 monthly coaching calls on Zoom",
+                "Everything in Premium",
+                "Weekly live group coaching calls",
+                "1 private call per month with Corey",
               ]}
-              cta="Apply for VIP Access"
+              cta="Apply for VIP"
               accent="violet"
-              featured
             />
           </div>
         </section>
@@ -720,71 +731,44 @@ function MobileLayout() {
             </h2>
           </div>
 
-          <div className="space-y-4">
-            <StoryCard
-              name="Marcus Ellison"
-              role="Logistics Operator • Texas"
-              result="$180K Accessed"
-              body="Used structure, positioning, and improved fundability to move from stalled growth into real working capital conversations."
+          <div className="grid gap-4">
+            <ProofCard
+              title="Funding Accessed"
+              value="$2.1M+"
+              detail="Illustrative placeholder for capital secured through positioning and readiness."
+              accent="emerald"
             />
-            <StoryCard
-              name="Andre Wallace"
-              role="Real Estate Entrepreneur • Florida"
-              result="3 Deals Closed"
-              body="Came in looking for clarity, tightened the strategy, and used the right tools to move with much more confidence and discipline."
+            <ProofCard
+              title="Entities Reviewed"
+              value="47"
+              detail="A clean proof block that signals real-world activity."
+              accent="sky"
             />
           </div>
         </section>
 
         <section className="mt-6">
-          <div className="space-y-3">
-            <ExpandableSection
-              title="What’s inside the League"
-              subtitle="Tap to see what members actually get"
-              defaultOpen={false}
-            >
-              <div className="space-y-3 text-sm leading-7 text-slate-300">
-                <p>Credit education, structured guidance, live calls, templates, and a clearer path toward funding readiness.</p>
-              </div>
-            </ExpandableSection>
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <h2 className="text-2xl font-semibold text-white">
+              They want a real framework, not random internet advice.
+            </h2>
+            <div className="mt-4 space-y-3 text-sm leading-7 text-slate-300">
+              <p>They want access to better funding conversations.</p>
+              <p>They want direct exposure to how Corey thinks.</p>
+              <p>They want a clear path that feels premium and believable.</p>
+            </div>
 
-            <ExpandableSection
-              title="Why members join"
-              subtitle="Quick reasons people step in"
-              defaultOpen={false}
-            >
-              <div className="space-y-2 text-sm text-slate-300">
-                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">They want a real framework, not random internet advice.</div>
-                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">They want access to better funding conversations.</div>
-                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">They want direct exposure to how Corey thinks.</div>
-              </div>
-            </ExpandableSection>
-
-            <ExpandableSection
-              title="How it works"
-              subtitle="Fast view of the path"
-              defaultOpen={false}
-            >
-              <div className="space-y-2 text-sm text-slate-300">
-                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Join the right tier</div>
-                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Learn the framework</div>
-                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Apply the system</div>
-                <div className="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-3">Move toward better opportunities</div>
-              </div>
-            </ExpandableSection>
-
-            <ExpandableSection
-              title="What serious members care about"
-              subtitle="For investors and operators"
-              defaultOpen={false}
-            >
-              <div className="grid grid-cols-2 gap-3">
-                <CompactStat value="$28K" label="Avg deal size" accent="amber" />
-                <CompactStat value="12" label="Qualified clients" accent="violet" />
-                <CompactStat value="3" label="VIP members" accent="emerald" />
-                <CompactStat value="4" label="New this month" accent="sky" />
-              </div>
-            </ExpandableSection>
+            <div className="mt-5 grid grid-cols-1 gap-3">
+              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950">
+                Join the right tier
+              </button>
+              <button
+                onClick={() => setActivePanel("overview")}
+                className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white"
+              >
+                Learn the framework
+              </button>
+            </div>
           </div>
         </section>
 
@@ -801,10 +785,26 @@ function MobileLayout() {
             </p>
 
             <div className="mt-5 grid grid-cols-1 gap-3">
-              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950">
+              <button
+                onClick={() =>
+                  document.getElementById("membership")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950"
+              >
                 View Membership Options
               </button>
-              <button className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white">
+              <button
+                onClick={() =>
+                  document.getElementById("overview")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white"
+              >
                 Watch Overview
               </button>
             </div>
