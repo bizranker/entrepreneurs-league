@@ -546,10 +546,6 @@ function MobileLayout() {
               Wealth Education • Deals • Access
             </div>
 
-            <div className="mt-4">
-              <LeagueWordmark size="sm" />
-            </div>
-
             <h1 className="mt-5 text-4xl font-semibold leading-tight tracking-tight text-white">
               Access funding, credit, and real deals.
             </h1>
