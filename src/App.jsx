@@ -219,15 +219,12 @@ function DesktopLayout() {
     <div className="hidden md:block">
       <div className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-4">
-            <LeagueWordmark size="sm" />
-            <button
-              onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
-            >
-              Join Now
-            </button>
-          </div>
+          <button
+            onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+          >
+            Join Now
+          </button>
           <div className="hidden text-xs tracking-wide text-slate-400 sm:block">
             Private Access • Structured Entry
           </div>
@@ -311,21 +308,21 @@ function DesktopLayout() {
               </div>
 
               <div className="space-y-4">
-                <div onClick={() => document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth", block: "start" })} role="button" tabIndex={0} className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
                   <p className="text-sm font-semibold text-white">1. Learn the System</p>
                   <p className="mt-1 text-sm text-slate-300">
                     Understand how credit, capital, and opportunity fit together.
                   </p>
                 </div>
 
-                <div onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })} role="button" tabIndex={0} className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
                   <p className="text-sm font-semibold text-white">2. Find Your Position</p>
                   <p className="mt-1 text-sm text-slate-300">
                     See where you fit, what you qualify for, and what the next serious step looks like.
                   </p>
                 </div>
 
-                <div onClick={() => window.location.href = "/login"} role="button" tabIndex={0} className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
                   <p className="text-sm font-semibold text-white">3. Move With Intention</p>
                   <p className="mt-1 text-sm text-slate-300">
                     Enter the right tier, access the right tools, and move toward real opportunities.
@@ -333,7 +330,7 @@ function DesktopLayout() {
                 </div>
               </div>
 
-              <div onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth", block: "start" })} role="button" tabIndex={0} className="cursor-pointer mt-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
+              <div className="mt-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
                 <p className="text-sm font-semibold text-emerald-300">Positioning</p>
                 <p className="mt-2 text-sm leading-7 text-slate-200">
                   This is not content.
@@ -342,11 +339,11 @@ function DesktopLayout() {
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-200">
-                <div onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth", block: "start" })} role="button" tabIndex={0} className="cursor-pointer rounded-2xl border border-sky-500/20 bg-sky-500/5 p-3">
+                <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-3">
                   <div className="font-medium text-sky-300">Authority Layer</div>
                   Clear positioning, proof, and trust signals for serious visitors.
                 </div>
-                <div onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })} role="button" tabIndex={0} className="cursor-pointer rounded-2xl border border-violet-500/20 bg-violet-500/5 p-3">
+                <div className="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-3">
                   <div className="font-medium text-violet-300">Access Layer</div>
                   A direct path into the right tier, offer, or next step.
                 </div>
