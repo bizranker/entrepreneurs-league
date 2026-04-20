@@ -217,6 +217,15 @@ function PathCard({ title, body }) {
 function DesktopLayout() {
   return (
     <div className="hidden md:block">
+      <div className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+          <LeagueWordmark size="sm" />
+          <div className="hidden text-xs tracking-wide text-slate-400 sm:block">
+            Private Access • Structured Entry
+          </div>
+        </div>
+      </div>
+
       <main className="px-4 pb-10 pt-4">
         <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1.04fr_0.96fr] lg:py-24">
           <div className="max-w-3xl">
@@ -225,7 +234,7 @@ function DesktopLayout() {
             </div>
 
             <h1 className="text-5xl font-semibold tracking-tight text-white md:text-6xl lg:text-7xl">
-              Access capital, credit, and strategic deals — from the right position.
+              Access capital, positioning, and deal flow — from the inside.
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
@@ -333,39 +342,39 @@ function DesktopLayout() {
           </div>
         </section>
 
-        <section id="overview" className="mx-auto max-w-7xl px-6 py-4">
+        <section id="overview" className="mx-auto max-w-7xl px-6 py-6">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-400">
               Proof of Position
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Serious visitors respond to outcomes, structure, and visible proof.
+              This platform is designed for clarity, positioning, and real opportunity flow.
             </h2>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             <ProofCard
-              title="Funding Accessed"
-              value="$2.1M+"
-              detail="Illustrative placeholder for capital secured through positioning and business readiness."
+              title="Structured Access"
+              value="Clear Entry"
+              detail="Visitors immediately understand where they fit and what their next move is."
               accent="emerald"
             />
             <ProofCard
-              title="Entities Reviewed"
-              value="47"
-              detail="Example proof block showing how many opportunities were assessed or positioned for action."
+              title="Positioning"
+              value="High Trust"
+              detail="The experience signals credibility, seriousness, and intention from the first interaction."
               accent="sky"
             />
             <ProofCard
-              title="Qualified Clients"
-              value="12"
-              detail="Serious buyers, investors, or operators who moved beyond curiosity."
+              title="Opportunity Flow"
+              value="Directed"
+              detail="Each pathway leads toward a defined outcome — not random browsing."
               accent="violet"
             />
             <ProofCard
-              title="Average Deal Size"
-              value="$28K"
-              detail="A clean way to signal economic seriousness without hype-heavy language."
+              title="Audience Quality"
+              value="Filtered"
+              detail="Designed to attract people ready to act, not just consume content."
               accent="amber"
             />
           </div>
@@ -396,7 +405,7 @@ function DesktopLayout() {
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-                  How It Works
+                  The System
                 </p>
                 <h3 className="mt-3 text-3xl font-semibold tracking-tight">
                   A clear path from curiosity to access.
@@ -405,7 +414,7 @@ function DesktopLayout() {
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <PathCard title="Learn the System" body="Videos, training, proof, and a clear first step." />
                   <PathCard title="Get Direct Guidance" body="A direct route for people ready to book time and move with intention." />
-                  <PathCard title="Access Opportunities" body="A polished path for serious people looking for strategic deals and capital." />
+                  <PathCard title="Access Opportunities" body="A sharper presentation for serious people looking for strategic deals and capital." />
                   <PathCard title="Enter the Inner Circle" body="High-value services, premium support, and the strongest next step." />
                 </div>
               </div>
@@ -452,13 +461,13 @@ function DesktopLayout() {
               tier="Standard"
               price="$149"
               cadence="month"
-              subtitle="Best for newer entrepreneurs who want structure, templates, and a direct starting point."
+              subtitle="For individuals getting serious about credit, structure, and positioning."
               features={[
                 "Access to hiddencreditsecrets.com",
                 "10 credit repair templates",
                 "1 monthly coaching call on Zoom",
               ]}
-              cta="Get Started"
+              cta="Start at the Foundation"
               accent="emerald"
             />
 
@@ -466,13 +475,13 @@ function DesktopLayout() {
               tier="Premium"
               price="$997"
               cadence="year"
-              subtitle="For committed operators who want deeper material, stronger training, and more live support."
+              subtitle="For operators who want deeper understanding, better execution, and consistent guidance."
               features={[
                 "Everything in Standard",
                 "Credit repair course",
                 "2 monthly coaching calls on Zoom",
               ]}
-              cta="Start with Premium"
+              cta="Step Into Premium"
               accent="sky"
             />
 
@@ -480,13 +489,13 @@ function DesktopLayout() {
               tier="VIP"
               price="$2497"
               cadence="year"
-              subtitle="High-touch support for serious entrepreneurs, investors, and people ready for direct strategy."
+              subtitle="For serious entrepreneurs and investors who want direct access and strategic direction."
               features={[
                 "Everything in Premium",
                 "Weekly live group coaching calls",
                 "1 private coaching call per month with Corey",
               ]}
-              cta="Apply for VIP"
+              cta="Request Private Access"
               accent="violet"
             />
           </div>
@@ -499,11 +508,11 @@ function DesktopLayout() {
             </p>
 
             <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              A premium entry point that feels credible, clear, and built for serious use.
+              Start at the right level. Move with clarity.
             </h3>
 
             <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-300">
-              This version keeps the polished visual style while using stronger language, clearer pathways, and a more believable route into action.
+              This is a structured entry point into better positioning, better decisions, and better opportunities.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -526,6 +535,12 @@ function MobileLayout() {
 
   return (
     <div className="md:hidden">
+      <div className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+        <div className="flex items-center justify-center py-3">
+          <LeagueWordmark size="sm" />
+        </div>
+      </div>
+
       <main className="px-4 pb-10 pt-4">
         <section>
           <div className="rounded-[2rem] border border-white/10 bg-black/30 p-5 backdrop-blur-xl">
@@ -634,10 +649,10 @@ function MobileLayout() {
             </h2>
 
             <div className="mt-5 space-y-3">
-              <PathCard title="Education Path" body="Videos, proof, and simple entry points." />
-              <PathCard title="Consulting Path" body="A direct route into paid guidance." />
-              <PathCard title="Investor Path" body="A sharper presentation for serious people." />
-              <PathCard title="Premium Offer Path" body="Elite services and backend opportunities." />
+              <PathCard title="Learn the System" body="Videos, proof, and simple entry points." />
+              <PathCard title="Get Direct Guidance" body="A direct route into paid guidance." />
+              <PathCard title="Access Opportunities" body="A sharper presentation for serious people." />
+              <PathCard title="Enter the Inner Circle" body="Elite services and backend opportunities." />
             </div>
 
             <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/70 p-4">
@@ -663,7 +678,7 @@ function MobileLayout() {
           </div>
         </section>
 
-        <section className="mt-6">
+        <section id="membership" className="mt-6">
           <div className="mb-4">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
               Membership Options
@@ -681,13 +696,13 @@ function MobileLayout() {
               tier="Standard"
               price="$149"
               cadence="month"
-              subtitle="For newer entrepreneurs who want structure and a real starting point."
+              subtitle="For individuals getting serious about credit, structure, and positioning."
               features={[
                 "Access to hiddencreditsecrets.com",
                 "10 credit repair templates",
                 "1 monthly coaching call on Zoom",
               ]}
-              cta="Get Started"
+              cta="Start at the Foundation"
               accent="emerald"
             />
 
@@ -695,13 +710,13 @@ function MobileLayout() {
               tier="Premium"
               price="$997"
               cadence="year"
-              subtitle="For committed operators who want stronger material and more support."
+              subtitle="For operators who want deeper understanding, better execution, and consistent guidance."
               features={[
                 "Everything in Standard",
                 "Credit repair course",
                 "2 monthly coaching calls on Zoom",
               ]}
-              cta="Start with Premium"
+              cta="Step Into Premium"
               accent="sky"
             />
 
@@ -709,13 +724,13 @@ function MobileLayout() {
               tier="VIP"
               price="$2497"
               cadence="year"
-              subtitle="For serious people who want direct strategy and high-touch support."
+              subtitle="For serious entrepreneurs and investors who want direct access and strategic direction."
               features={[
                 "Everything in Premium",
                 "Weekly live group coaching calls",
                 "1 private call per month with Corey",
               ]}
-              cta="Apply for VIP"
+              cta="Request Private Access"
               accent="violet"
             />
           </div>
@@ -733,15 +748,15 @@ function MobileLayout() {
 
           <div className="grid gap-4">
             <ProofCard
-              title="Funding Accessed"
-              value="$2.1M+"
-              detail="Illustrative placeholder for capital secured through positioning and readiness."
+              title="Structured Access"
+              value="Clear Entry"
+              detail="Visitors immediately understand where they fit and what their next move is."
               accent="emerald"
             />
             <ProofCard
-              title="Entities Reviewed"
-              value="47"
-              detail="A clean proof block that signals real-world activity."
+              title="Positioning"
+              value="High Trust"
+              detail="The experience signals credibility, seriousness, and intention from the first interaction."
               accent="sky"
             />
           </div>
