@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function BuildingMark({ size = "md" }) {
   const map = {
@@ -531,8 +531,6 @@ function DesktopLayout() {
 }
 
 function MobileLayout() {
-  const [activePanel, setActivePanel] = useState("overview");
-
   return (
     <div className="md:hidden">
       <div className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
@@ -561,11 +559,24 @@ function MobileLayout() {
             </p>
 
             <div className="mt-6 grid grid-cols-1 gap-3">
-              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950">
+              <button
+                onClick={() =>
+                  document.getElementById("overview")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950"
+              >
                 Watch Overview
               </button>
               <button
-                onClick={() => setActivePanel("options")}
+                onClick={() =>
+                  document.getElementById("membership")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
                 className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white"
               >
                 View Options
@@ -619,6 +630,32 @@ function MobileLayout() {
           </div>
         </section>
 
+        <section id="overview" className="mt-6">
+          <div className="mb-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
+              Proof of Position
+            </p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">
+              This platform is designed for clarity, positioning, and real opportunity flow.
+            </h2>
+          </div>
+
+          <div className="grid gap-4">
+            <ProofCard
+              title="Structured Access"
+              value="Clear Entry"
+              detail="Visitors immediately understand where they fit and what their next move is."
+              accent="emerald"
+            />
+            <ProofCard
+              title="Positioning"
+              value="High Trust"
+              detail="The experience signals credibility, seriousness, and intention from the first interaction."
+              accent="sky"
+            />
+          </div>
+        </section>
+
         <section className="mt-6">
           <div className="grid gap-4">
             <FeatureCard
@@ -639,7 +676,7 @@ function MobileLayout() {
           </div>
         </section>
 
-        <section className="mt-6">
+        <section id="how-it-works" className="mt-6">
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
               The System
@@ -737,32 +774,6 @@ function MobileLayout() {
         </section>
 
         <section className="mt-6">
-          <div className="mb-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
-              Real Wins
-            </p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">
-              Proof people can respect.
-            </h2>
-          </div>
-
-          <div className="grid gap-4">
-            <ProofCard
-              title="Structured Access"
-              value="Clear Entry"
-              detail="Visitors immediately understand where they fit and what their next move is."
-              accent="emerald"
-            />
-            <ProofCard
-              title="Positioning"
-              value="High Trust"
-              detail="The experience signals credibility, seriousness, and intention from the first interaction."
-              accent="sky"
-            />
-          </div>
-        </section>
-
-        <section className="mt-6">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-2xl font-semibold text-white">
               They want a real framework, not random internet advice.
@@ -774,11 +785,24 @@ function MobileLayout() {
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-3">
-              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950">
+              <button
+                onClick={() =>
+                  document.getElementById("membership")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950"
+              >
                 Join the right tier
               </button>
               <button
-                onClick={() => setActivePanel("overview")}
+                onClick={() =>
+                  document.getElementById("how-it-works")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
                 className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white"
               >
                 Learn the framework
