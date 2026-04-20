@@ -7,7 +7,7 @@
     <!-- ✅ FAVICON (SVG from /public) -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <title>Entrepreneur’s League | Private Access Platform</title>
+    <title>BizRanker Investor Prototype</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
   </head>

@@ -342,7 +342,7 @@ function DesktopLayout() {
           </div>
         </section>
 
-        <section id="overview" className="mx-auto max-w-7xl px-6 py-6">
+        <section id="overview" className="scroll-mt-24 mx-auto max-w-7xl px-6 py-6">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-400">
               Proof of Position
@@ -400,7 +400,7 @@ function DesktopLayout() {
           </div>
         </section>
 
-        <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-10">
+        <section id="how-it-works" className="scroll-mt-24 mx-auto max-w-7xl px-6 py-10">
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
@@ -446,7 +446,7 @@ function DesktopLayout() {
           </div>
         </section>
 
-        <section id="membership" className="mx-auto max-w-7xl px-6 py-10">
+        <section id="membership" className="scroll-mt-24 mx-auto max-w-7xl px-6 py-10">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-300">
               Membership Options
@@ -626,7 +626,7 @@ function MobileLayout() {
           </div>
         </section>
 
-        <section id="overview" className="mt-6">
+        <section id="overview" className="scroll-mt-24 mt-6">
           <div className="mb-4">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
               Proof of Position
@@ -672,7 +672,7 @@ function MobileLayout() {
           </div>
         </section>
 
-        <section id="how-it-works" className="mt-6">
+        <section id="how-it-works" className="scroll-mt-24 mt-6">
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
               The System
@@ -711,7 +711,7 @@ function MobileLayout() {
           </div>
         </section>
 
-        <section id="membership" className="mt-6">
+        <section id="membership" className="scroll-mt-24 mt-6">
           <div className="mb-4">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
               Membership Options
