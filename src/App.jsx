@@ -219,37 +219,23 @@ function DesktopLayout() {
     <div className="hidden md:block">
       <div className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-          <LeagueWordmark size="sm" />
-          <div className="ml-auto flex items-center gap-4">
-            <button
-              onClick={() => window.location.href = "/login"}
-              className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
-            >
-              Login
-            </button>
+          <button
+            onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+          >
+            Join Now
+          </button>
+          <div className="hidden text-xs tracking-wide text-slate-400 sm:block">
+            Private Access • Structured Entry
           </div>
-          <div className="ml-auto flex items-center gap-4">
-            <button
-              onClick={() => window.location.href = "/login"}
-              className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
-            >
-              Login
-            </button>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="hidden text-xs tracking-wide text-slate-400 sm:block">
-              Private Access • Structured Entry
-            </div>
-            <button
-              onClick={() => window.location.href = "/login"}
-              className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
-            >
-              Login
-            </button>
-          </div>
+          <button
+            onClick={() => window.location.href = "/login"}
+            className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+          >
+            Login
+          </button>
         </div>
-      </div>
-
+        </div>
       <main className="px-4 pb-10 pt-4">
         <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1.04fr_0.96fr] lg:py-24">
           <div className="max-w-3xl">
