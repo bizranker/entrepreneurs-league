@@ -449,8 +449,7 @@ function DesktopLayout() {
         <section id="membership" className="scroll-mt-24 mx-auto max-w-7xl px-6 py-10">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-300">
-              <section id="membership">
-Membership Options
+              Membership Options
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               Let people understand the value before they choose a level.
@@ -576,7 +575,7 @@ function MobileLayout() {
                 }
                 className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white"
               >
-                Choose Your Level
+                View Options
               </button>
             </div>
 
@@ -830,7 +829,7 @@ function MobileLayout() {
                 }
                 className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950"
               >
-                Choose Your Level
+                View Membership Options
               </button>
               <button
                 onClick={() =>
