@@ -485,40 +485,7 @@ function DesktopLayout() {
                   }
                 />
 
-                <div className="grid grid-cols-2 gap-3 text-xs text-slate-200">
-                  <div
-                    onClick={() =>
-                      document.getElementById("overview")?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      })
-                    }
-                    role="button"
-                    tabIndex={0}
-                    className="cursor-pointer rounded-2xl border border-sky-500/20 bg-sky-500/5 p-3 transition duration-300 hover:bg-sky-500/10"
-                  >
-                    <div className="font-medium text-sky-300">Authority Layer</div>
-                    Clear positioning, proof, and trust signals for serious visitors.
-                  </div>
 
-                  <div
-                    onClick={() =>
-                      document.getElementById("membership")?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      })
-                    }
-                    role="button"
-                    tabIndex={0}
-                    className="cursor-pointer rounded-2xl border border-violet-500/20 bg-violet-500/5 p-3 transition duration-300 hover:bg-violet-500/10"
-                  >
-                    <div className="font-medium text-violet-300">Access Layer</div>
-                    A direct path into the right tier, offer, or next step.
-                  </div>
-                </div>
-              </div>
-            </SectionShell>
-          </div>
         </section>
 
         <section id="overview" className="scroll-mt-24 mx-auto max-w-7xl px-6 py-6">
