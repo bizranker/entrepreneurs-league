@@ -308,12 +308,12 @@ function DesktopLayout() {
             <div className="rounded-[2rem] border border-white/10 bg-black/30 p-8 shadow-2xl backdrop-blur-xl">
               <div className="mb-6">
                 <div className="mb-4 overflow-hidden">
-                  <LeagueWordmark size="md" />
+                  <LeagueWordmark size="sm" />
                 </div>
                 <h2 className="text-2xl font-semibold text-white">Private Access Portal</h2>
-                <p className="mt-2 text-sm text-slate-300">
-                  Private access portal for people ready to move with clarity, structure, and opportunity.
-                </p>
+		<p className="mt-2 text-sm text-slate-300">
+  		A private access layer for serious operators moving with clarity, structure, and intent.
+		</p>
               </div>
 
               <div className="space-y-4">
@@ -325,7 +325,7 @@ function DesktopLayout() {
                 >
                   <p className="text-sm font-semibold text-white">1. Learn the System</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    Understand how credit, capital, and opportunity fit together.
+                    See how credit, capital, and opportunity connect.
                   </p>
                 </div>
 
@@ -337,7 +337,7 @@ function DesktopLayout() {
                 >
                   <p className="text-sm font-semibold text-white">2. Find Your Position</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    See where you fit, what you qualify for, and what the next serious step looks like.
+                    Understand your fit, your tier, and your next serious move.
                   </p>
                 </div>
 
@@ -349,7 +349,7 @@ function DesktopLayout() {
                 >
                   <p className="text-sm font-semibold text-white">3. Move With Intention</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    Enter the right tier, access the right tools, and move toward real opportunities.
+                    Enter the right path and advance toward real opportunities.
                   </p>
                 </div>
               </div>
@@ -362,7 +362,7 @@ function DesktopLayout() {
               >
                 <p className="text-sm font-semibold text-emerald-300">Positioning</p>
                 <p className="mt-2 text-sm leading-7 text-slate-200">
-                  This is not content. It is a controlled entry point into opportunity, capital, and deal flow.
+                  A controlled entry point into opportunity, capital, and deal flow.
                 </p>
               </div>
 
