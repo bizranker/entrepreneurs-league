@@ -321,9 +321,19 @@ function DesktopLayout() {
                   onClick={() => document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth", block: "start" })}
                   role="button"
                   tabIndex={0}
-                  className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-4"
+                  className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-5 transition hover:border-sky-400/40 hover:bg-slate-900/80"
                 >
-                  <p className="text-sm font-semibold text-white">1. Learn the System</p>
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-full bg-sky-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-sky-300">
+                      System
+                    </span>
+                    <span className="text-slate-400">→</span>
+                  </div>
+
+                  <p className="mt-3 text-sm font-semibold text-white">
+                    1. Learn the System
+                  </p>
+
                   <p className="mt-1 text-sm text-slate-300">
                     See how credit, capital, and opportunity connect.
                   </p>
@@ -333,9 +343,19 @@ function DesktopLayout() {
                   onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })}
                   role="button"
                   tabIndex={0}
-                  className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-4"
+                  className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-5 transition hover:border-violet-400/40 hover:bg-slate-900/80"
                 >
-                  <p className="text-sm font-semibold text-white">2. Find Your Position</p>
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-full bg-violet-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-violet-300">
+                      Tiering
+                    </span>
+                    <span className="text-slate-400">→</span>
+                  </div>
+
+                  <p className="mt-3 text-sm font-semibold text-white">
+                    2. Find Your Position
+                  </p>
+
                   <p className="mt-1 text-sm text-slate-300">
                     Understand your fit, your tier, and your next serious move.
                   </p>
@@ -345,9 +365,19 @@ function DesktopLayout() {
                   onClick={() => navigate("/login")}
                   role="button"
                   tabIndex={0}
-                  className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-4"
+                  className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-5 transition hover:border-emerald-400/40 hover:bg-slate-900/80"
                 >
-                  <p className="text-sm font-semibold text-white">3. Move With Intention</p>
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-emerald-300">
+                      Access
+                    </span>
+                    <span className="text-slate-400">→</span>
+                  </div>
+
+                  <p className="mt-3 text-sm font-semibold text-white">
+                    3. Move With Intention
+                  </p>
+
                   <p className="mt-1 text-sm text-slate-300">
                     Enter the right path and advance toward real opportunities.
                   </p>
