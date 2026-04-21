@@ -245,8 +245,9 @@ function DesktopLayout() {
         </div>
       </div>
 
-      <main className="px-4 pb-10 pt-4">
-        <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1.04fr_0.96fr] lg:py-24">
+	<main className="px-4 pb-10 pt-2">
+	  <section className="mx-auto grid max-w-7xl items-start gap-10 px-6 py-10 lg:grid-cols-[1.04fr_0.96fr] lg:py-14">
+
           <div className="max-w-3xl">
             <div className="mb-5 inline-flex rounded-full border border-sky-400/20 bg-sky-500/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-sky-200">
               Wealth Education • Opportunity Access • Premium Positioning
