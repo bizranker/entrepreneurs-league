@@ -147,6 +147,70 @@ function SectionHeading({ eyebrow, title, body, accent = "emerald" }) {
   );
 }
 
+function accentTheme(accent) {
+  const map = {
+    emerald: {
+      badge: "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
+      line: "from-emerald-300/0 via-emerald-300/70 to-emerald-300/0",
+      hover:
+        "hover:border-emerald-400/30 hover:bg-white/[0.07] hover:shadow-[0_0_34px_rgba(16,185,129,0.16)]",
+      arrow: "group-hover:text-emerald-300",
+    },
+    sky: {
+      badge: "border-sky-400/20 bg-sky-500/10 text-sky-300",
+      line: "from-sky-300/0 via-sky-300/70 to-sky-300/0",
+      hover: "hover:border-sky-400/30 hover:bg-white/[0.07] hover:shadow-[0_0_34px_rgba(56,189,248,0.16)]",
+      arrow: "group-hover:text-sky-300",
+    },
+    violet: {
+      badge: "border-violet-400/20 bg-violet-500/10 text-violet-300",
+      line: "from-violet-300/0 via-violet-300/70 to-violet-300/0",
+      hover:
+        "hover:border-violet-400/30 hover:bg-white/[0.07] hover:shadow-[0_0_34px_rgba(168,85,247,0.16)]",
+      arrow: "group-hover:text-violet-300",
+    },
+  };
+
+  return map[accent];
+}
+
+function PremiumCard({
+  eyebrow,
+  title,
+  body,
+  accent = "sky",
+  onClick,
+  interactive = false,
+  className = "",
+}) {
+  const a = accentTheme(accent);
+
+  return (
+    <div
+      onClick={onClick}
+      role={interactive ? "button" : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      className={`group relative rounded-3xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 ${a.hover} ${interactive ? "cursor-pointer" : ""} ${className}`}
+    >
+      <div className={`pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r ${a.line}`} />
+      <div
+        className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] ${a.badge}`}
+      >
+        {eyebrow}
+      </div>
+
+      {interactive ? (
+        <div className="absolute right-6 top-6 text-slate-500 opacity-50 transition duration-200 group-hover:translate-x-1 group-hover:opacity-100">
+          <span className={a.arrow}>→</span>
+        </div>
+      ) : null}
+
+      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{title}</h3>
+      <p className="mt-3 text-sm leading-7 text-slate-300">{body}</p>
+    </div>
+  );
+}
+
 function StatCard({ value, label, accent = "emerald" }) {
   const tones = {
     emerald:
@@ -168,66 +232,6 @@ function StatCard({ value, label, accent = "emerald" }) {
   );
 }
 
-function InfoCard({ eyebrow, title, body, accent = "sky" }) {
-  const tones = {
-    emerald:
-      "border-emerald-400/25 bg-emerald-400/10 text-emerald-300 hover:shadow-[0_0_30px_rgba(16,185,129,0.16)]",
-    sky: "border-sky-400/25 bg-sky-500/10 text-sky-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.16)]",
-    violet:
-      "border-violet-400/25 bg-violet-500/10 text-violet-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.16)]",
-  };
-
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07]">
-      <div
-        className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.26em] ${tones[accent]}`}
-      >
-        {eyebrow}
-      </div>
-      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-7 text-slate-300">{body}</p>
-    </div>
-  );
-}
-
-function CapabilityCard({ step, title, body, accent = "sky" }) {
-  const tones = {
-    emerald: {
-      badge: "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
-      hover: "hover:border-emerald-400/30 hover:shadow-[0_0_32px_rgba(16,185,129,0.14)]",
-    },
-    sky: {
-      badge: "border-sky-400/20 bg-sky-500/10 text-sky-300",
-      hover: "hover:border-sky-400/30 hover:shadow-[0_0_32px_rgba(56,189,248,0.14)]",
-    },
-    violet: {
-      badge: "border-violet-400/20 bg-violet-500/10 text-violet-300",
-      hover: "hover:border-violet-400/30 hover:shadow-[0_0_32px_rgba(168,85,247,0.14)]",
-    },
-  };
-
-  const a = tones[accent];
-
-  return (
-    <div
-      className={`group rounded-3xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07] ${a.hover}`}
-    >
-      <div className="flex items-center justify-between">
-        <div
-          className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${a.badge}`}
-        >
-          Step {step}
-        </div>
-        <span className="text-slate-500 opacity-60 transition duration-200 group-hover:translate-x-1 group-hover:opacity-100">
-          →
-        </span>
-      </div>
-      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-7 text-slate-300">{body}</p>
-    </div>
-  );
-}
-
 function TierCard({
   tier,
   price,
@@ -244,12 +248,14 @@ function TierCard({
         "bg-gradient-to-r from-emerald-400 to-emerald-500 text-slate-950 hover:from-emerald-300 hover:to-emerald-400 shadow-[0_10px_30px_rgba(16,185,129,0.18)]",
       hover:
         "hover:border-emerald-400/25 hover:shadow-[0_0_34px_rgba(16,185,129,0.16)]",
+      line: "from-emerald-300/0 via-emerald-300/70 to-emerald-300/0",
     },
     sky: {
       badge: "border-sky-500/20 bg-sky-500/10 text-sky-300",
       button:
         "bg-gradient-to-r from-sky-300 to-sky-400 text-slate-950 hover:from-sky-200 hover:to-sky-300 shadow-[0_10px_30px_rgba(56,189,248,0.18)]",
       hover: "hover:border-sky-500/25 hover:shadow-[0_0_34px_rgba(56,189,248,0.16)]",
+      line: "from-sky-300/0 via-sky-300/70 to-sky-300/0",
     },
     violet: {
       badge: "border-violet-500/20 bg-violet-500/10 text-violet-300",
@@ -257,6 +263,7 @@ function TierCard({
         "bg-gradient-to-r from-violet-300 to-violet-400 text-slate-950 hover:from-violet-200 hover:to-violet-300 shadow-[0_10px_30px_rgba(168,85,247,0.18)]",
       hover:
         "hover:border-violet-500/25 hover:shadow-[0_0_34px_rgba(168,85,247,0.16)]",
+      line: "from-violet-300/0 via-violet-300/70 to-violet-300/0",
     },
   };
 
@@ -264,8 +271,9 @@ function TierCard({
 
   return (
     <div
-      className={`flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07] ${a.hover}`}
+      className={`relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07] ${a.hover}`}
     >
+      <div className={`pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r ${a.line}`} />
       <div className={`inline-flex w-fit rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${a.badge}`}>
         {tier}
       </div>
@@ -426,78 +434,42 @@ function DesktopLayout() {
               </div>
 
               <div className="space-y-4">
-                <div
+                <PremiumCard
+                  eyebrow="System"
+                  title="1. Learn the System"
+                  body="See how credit, capital, and opportunity connect."
+                  accent="sky"
+                  interactive
                   onClick={() =>
                     document.getElementById("how-it-works")?.scrollIntoView({
                       behavior: "smooth",
                       block: "start",
                     })
                   }
-                  role="button"
-                  tabIndex={0}
-                  className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-5 transition hover:border-sky-400/40 hover:bg-slate-900/80"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-sky-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-sky-300">
-                      System
-                    </span>
-                    <span className="text-slate-500 opacity-50 transition duration-200 group-hover:translate-x-1 group-hover:text-sky-300 group-hover:opacity-100">
-                      →
-                    </span>
-                  </div>
+                />
 
-                  <p className="mt-3 text-sm font-semibold text-white">1. Learn the System</p>
-                  <p className="mt-1 text-sm text-slate-300">
-                    See how credit, capital, and opportunity connect.
-                  </p>
-                </div>
-
-                <div
+                <PremiumCard
+                  eyebrow="Tiering"
+                  title="2. Find Your Position"
+                  body="Understand your fit, your tier, and your next serious move."
+                  accent="violet"
+                  interactive
                   onClick={() =>
                     document.getElementById("membership")?.scrollIntoView({
                       behavior: "smooth",
                       block: "start",
                     })
                   }
-                  role="button"
-                  tabIndex={0}
-                  className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-5 transition hover:border-violet-400/40 hover:bg-slate-900/80"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-violet-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-violet-300">
-                      Tiering
-                    </span>
-                    <span className="text-slate-500 opacity-50 transition duration-200 group-hover:translate-x-1 group-hover:text-violet-300 group-hover:opacity-100">
-                      →
-                    </span>
-                  </div>
+                />
 
-                  <p className="mt-3 text-sm font-semibold text-white">2. Find Your Position</p>
-                  <p className="mt-1 text-sm text-slate-300">
-                    Understand your fit, your tier, and your next serious move.
-                  </p>
-                </div>
-
-                <div
+                <PremiumCard
+                  eyebrow="Access"
+                  title="3. Move With Intention"
+                  body="A direct path into the right tier, offer, or next step."
+                  accent="emerald"
+                  interactive
                   onClick={() => navigate("/login")}
-                  role="button"
-                  tabIndex={0}
-                  className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-5 transition hover:border-emerald-400/40 hover:bg-slate-900/80"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-emerald-300">
-                      Access
-                    </span>
-                    <span className="text-slate-500 opacity-50 transition duration-200 group-hover:translate-x-1 group-hover:text-emerald-300 group-hover:opacity-100">
-                      →
-                    </span>
-                  </div>
-
-                  <p className="mt-3 text-sm font-semibold text-white">3. Move With Intention</p>
-                  <p className="mt-1 text-sm text-slate-300">
-                    A direct path into the right tier, offer, or next step.
-                  </p>
-                </div>
+                />
               </div>
 
               <div className="mt-6 space-y-4">
@@ -559,19 +531,19 @@ function DesktopLayout() {
             />
 
             <div className="grid gap-6 lg:grid-cols-3">
-              <InfoCard
+              <PremiumCard
                 eyebrow="Capital Context"
                 title="Premium entry before confusion."
                 body="Serious visitors should understand what exists, what tier they belong in, and how to move without wasting time."
                 accent="sky"
               />
-              <InfoCard
+              <PremiumCard
                 eyebrow="Deal Flow"
                 title="Better structure produces better action."
                 body="The system is designed to move a visitor from curiosity into tiered, premium decision-making."
                 accent="violet"
               />
-              <InfoCard
+              <PremiumCard
                 eyebrow="Trust Signal"
                 title="Presentation affects perceived value."
                 body="A controlled premium interface signals seriousness before a single call is booked."
@@ -591,23 +563,26 @@ function DesktopLayout() {
             />
 
             <div className="grid gap-6 lg:grid-cols-3">
-              <CapabilityCard
-                step="1"
+              <PremiumCard
+                eyebrow="Step 1"
                 title="See the structure"
                 body="Understand how positioning, funding, and opportunity fit together."
                 accent="sky"
+                interactive
               />
-              <CapabilityCard
-                step="2"
+              <PremiumCard
+                eyebrow="Step 2"
                 title="Choose the right level"
                 body="Enter the tier that matches your seriousness, needs, and next move."
                 accent="violet"
+                interactive
               />
-              <CapabilityCard
-                step="3"
+              <PremiumCard
+                eyebrow="Step 3"
                 title="Move with intent"
                 body="Use the private entry path to continue into the right offer or next step."
                 accent="emerald"
+                interactive
               />
             </div>
           </SectionShell>
@@ -782,23 +757,26 @@ function MobileLayout() {
               accent="sky"
             />
             <div className="grid gap-4">
-              <CapabilityCard
-                step="1"
+              <PremiumCard
+                eyebrow="Step 1"
                 title="See the structure"
                 body="Understand how positioning, capital, and opportunity connect."
                 accent="sky"
+                interactive
               />
-              <CapabilityCard
-                step="2"
+              <PremiumCard
+                eyebrow="Step 2"
                 title="Choose your level"
                 body="Pick the access path that matches your seriousness and timing."
                 accent="violet"
+                interactive
               />
-              <CapabilityCard
-                step="3"
+              <PremiumCard
+                eyebrow="Step 3"
                 title="Advance"
                 body="Use the private path into the right tier, offer, or next step."
                 accent="emerald"
+                interactive
               />
             </div>
           </SectionShell>
