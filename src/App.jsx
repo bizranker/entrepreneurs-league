@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function BuildingMark({ size = "md" }) {
   const map = {
@@ -112,7 +113,6 @@ function StatCard({ value, label, accent = "emerald" }) {
     emerald: "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
     sky: "border-sky-400/20 bg-sky-500/10 text-sky-300",
     violet: "border-violet-400/20 bg-violet-500/10 text-violet-300",
-    amber: "border-amber-400/20 bg-amber-500/10 text-amber-300",
   };
 
   return (
@@ -154,7 +154,7 @@ function ProofCard({ title, value, detail, accent = "emerald" }) {
   );
 }
 
-function TierCard({ tier, price, cadence, subtitle, features, cta, accent = "emerald" }) {
+function TierCard({ tier, price, cadence, subtitle, features, cta, accent = "emerald", onClick }) {
   const accents = {
     emerald: {
       badge: "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
@@ -198,7 +198,10 @@ function TierCard({ tier, price, cadence, subtitle, features, cta, accent = "eme
         ))}
       </ul>
 
-      <button className={`mt-auto w-full rounded-xl px-5 py-3 text-sm font-semibold transition ${a.button}`}>
+      <button
+        onClick={onClick}
+        className={`mt-auto w-full rounded-xl px-5 py-3 text-sm font-semibold transition ${a.button}`}
+      >
         {cta}
       </button>
     </div>
@@ -215,6 +218,8 @@ function PathCard({ title, body }) {
 }
 
 function DesktopLayout() {
+  const navigate = useNavigate();
+
   return (
     <div className="hidden md:block">
       <div className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
@@ -222,7 +227,7 @@ function DesktopLayout() {
           <div className="flex items-center gap-4">
             <LeagueWordmark size="sm" />
             <button
-              onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              onClick={() => navigate("/signup")}
               className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
             >
               Join Now
@@ -232,7 +237,7 @@ function DesktopLayout() {
             Private Access • Structured Entry
           </div>
           <button
-            onClick={() => window.location.href = "/login"}
+            onClick={() => navigate("/login")}
             className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
           >
             Login
@@ -252,8 +257,7 @@ function DesktopLayout() {
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-              This is designed to position serious people in front of real opportunity — not
-              just information.
+              This is designed to position serious people in front of real opportunity — not just information.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -305,7 +309,7 @@ function DesktopLayout() {
                 <div className="mb-4 overflow-hidden">
                   <LeagueWordmark size="md" />
                 </div>
-                <h2 className="text-2xl font-semibold">Private Access Portal</h2>
+                <h2 className="text-2xl font-semibold text-white">Private Access Portal</h2>
                 <p className="mt-2 text-sm text-slate-300">
                   Private access portal for people ready to move with clarity, structure, and opportunity.
                 </p>
@@ -337,7 +341,7 @@ function DesktopLayout() {
                 </div>
 
                 <div
-                  onClick={() => window.location.href = "/login"}
+                  onClick={() => navigate("/login")}
                   role="button"
                   tabIndex={0}
                   className="cursor-pointer rounded-2xl border border-white/10 bg-slate-950/70 p-4"
@@ -357,8 +361,7 @@ function DesktopLayout() {
               >
                 <p className="text-sm font-semibold text-emerald-300">Positioning</p>
                 <p className="mt-2 text-sm leading-7 text-slate-200">
-                  This is not content.
-                  It is a controlled entry point into opportunity, capital, and deal flow.
+                  This is not content. It is a controlled entry point into opportunity, capital, and deal flow.
                 </p>
               </div>
 
@@ -451,7 +454,7 @@ function DesktopLayout() {
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
                   The System
                 </p>
-                <h3 className="mt-3 text-3xl font-semibold tracking-tight">
+                <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white">
                   A clear path from curiosity to access.
                 </h3>
 
@@ -513,6 +516,7 @@ function DesktopLayout() {
               ]}
               cta="Start at the Foundation"
               accent="emerald"
+              onClick={() => navigate("/checkout/standard")}
             />
 
             <TierCard
@@ -527,6 +531,7 @@ function DesktopLayout() {
               ]}
               cta="Step Into Premium"
               accent="sky"
+              onClick={() => navigate("/checkout/premium")}
             />
 
             <TierCard
@@ -541,6 +546,7 @@ function DesktopLayout() {
               ]}
               cta="Request Private Access"
               accent="violet"
+              onClick={() => navigate("/checkout/vip")}
             />
           </div>
         </section>
@@ -560,10 +566,16 @@ function DesktopLayout() {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <button className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">
+              <button
+                onClick={() => navigate("/signup")}
+                className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              >
                 Continue to Phase 2
               </button>
-              <button className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              <button
+                onClick={() => navigate("/signup")}
+                className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
                 Add Real Brand Assets
               </button>
             </div>
@@ -575,6 +587,8 @@ function DesktopLayout() {
 }
 
 function MobileLayout() {
+  const navigate = useNavigate();
+
   return (
     <div className="md:hidden">
       <div className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
@@ -638,21 +652,36 @@ function MobileLayout() {
               </p>
 
               <div className="mt-5 space-y-3">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div
+                  onClick={() => document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                  role="button"
+                  tabIndex={0}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                >
                   <p className="text-sm font-semibold text-white">Learn the system</p>
                   <p className="mt-1 text-sm leading-7 text-slate-300">
                     See how credit, capital, and opportunity work together.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div
+                  onClick={() => document.getElementById("membership")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                  role="button"
+                  tabIndex={0}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                >
                   <p className="text-sm font-semibold text-white">Find your fit</p>
                   <p className="mt-1 text-sm leading-7 text-slate-300">
                     Understand whether you are here to learn, invest, or move directly.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div
+                  onClick={() => navigate("/login")}
+                  role="button"
+                  tabIndex={0}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                >
                   <p className="text-sm font-semibold text-white">Choose a serious next step</p>
                   <p className="mt-1 text-sm leading-7 text-slate-300">
                     Book, join, or apply based on your level of readiness.
@@ -660,7 +689,12 @@ function MobileLayout() {
                 </div>
               </div>
 
-              <div className="mt-5 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
+              <div
+                onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                role="button"
+                tabIndex={0}
+                className="mt-5 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4"
+              >
                 <p className="text-sm font-semibold text-emerald-300">Positioning</p>
                 <p className="mt-2 text-sm leading-7 text-slate-200">
                   This is a controlled entry point into better opportunities.
@@ -781,6 +815,7 @@ function MobileLayout() {
               ]}
               cta="Start at the Foundation"
               accent="emerald"
+              onClick={() => navigate("/checkout/standard")}
             />
 
             <TierCard
@@ -795,6 +830,7 @@ function MobileLayout() {
               ]}
               cta="Step Into Premium"
               accent="sky"
+              onClick={() => navigate("/checkout/premium")}
             />
 
             <TierCard
@@ -809,6 +845,7 @@ function MobileLayout() {
               ]}
               cta="Request Private Access"
               accent="violet"
+              onClick={() => navigate("/checkout/vip")}
             />
           </div>
         </section>
