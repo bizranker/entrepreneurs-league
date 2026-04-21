@@ -159,7 +159,8 @@ function accentTheme(accent) {
     sky: {
       badge: "border-sky-400/20 bg-sky-500/10 text-sky-300",
       line: "from-sky-300/0 via-sky-300/70 to-sky-300/0",
-      hover: "hover:border-sky-400/30 hover:bg-white/[0.07] hover:shadow-[0_0_34px_rgba(56,189,248,0.16)]",
+      hover:
+        "hover:border-sky-400/30 hover:bg-white/[0.07] hover:shadow-[0_0_34px_rgba(56,189,248,0.16)]",
       arrow: "group-hover:text-sky-300",
     },
     violet: {
@@ -484,9 +485,9 @@ function DesktopLayout() {
                     })
                   }
                 />
-				</div>
-
-
+              </div>
+            </SectionShell>
+          </div>
         </section>
 
         <section id="overview" className="scroll-mt-24 mx-auto max-w-7xl px-6 py-6">
