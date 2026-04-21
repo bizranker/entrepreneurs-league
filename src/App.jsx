@@ -484,6 +484,7 @@ function DesktopLayout() {
                     })
                   }
                 />
+				</div>
 
 
         </section>
