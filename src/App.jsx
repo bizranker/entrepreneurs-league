@@ -306,28 +306,6 @@ function TierCard({
   );
 }
 
-function HighlightStrip({ title, body, accent = "emerald", onClick }) {
-  const tones = {
-    emerald:
-      "border-emerald-400/20 bg-emerald-400/10 text-emerald-300 hover:bg-emerald-400/15 hover:shadow-[0_0_30px_rgba(16,185,129,0.14)]",
-    sky: "border-sky-400/20 bg-sky-500/10 text-sky-300 hover:bg-sky-500/15 hover:shadow-[0_0_30px_rgba(56,189,248,0.14)]",
-    violet:
-      "border-violet-400/20 bg-violet-500/10 text-violet-300 hover:bg-violet-500/15 hover:shadow-[0_0_30px_rgba(168,85,247,0.14)]",
-  };
-
-  return (
-    <div
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      className={`cursor-pointer rounded-2xl border p-5 transition duration-300 ${tones[accent]}`}
-    >
-      <p className="text-sm font-semibold">{title}</p>
-      <p className="mt-2 text-sm leading-7 text-slate-200">{body}</p>
-    </div>
-  );
-}
-
 function DesktopLayout() {
   const navigate = useNavigate();
 
@@ -470,20 +448,6 @@ function DesktopLayout() {
                   accent="emerald"
                   interactive
                   onClick={() => navigate("/login")}
-                />
-              </div>
-
-              <div className="mt-6 space-y-4">
-                <HighlightStrip
-                  title="Positioning"
-                  body="A controlled entry point into opportunity, capital, and deal flow."
-                  accent="emerald"
-                  onClick={() =>
-                    document.getElementById("overview")?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    })
-                  }
                 />
               </div>
             </SectionShell>
